@@ -396,6 +396,13 @@ header {
   overflow: hidden;
   cursor: pointer;
   position: relative;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover, .gallery-item:active {
+  border-color: var(--primary-red);
+  transform: scale(1.05);
 }
 
 .gallery-item img {
@@ -403,10 +410,6 @@ header {
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
-}
-
-.gallery-item:hover img, .gallery-item:active img {
-  transform: scale(1.05);
 }
 
 .gallery-item.video::after {
@@ -785,33 +788,48 @@ footer {
   line-height: 1.4;
 }
 
-/* Swipe Navigation */
-.swipe-area {
+/* Image Modal */
+.image-modal {
   display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Back to Top Button */
-.back-to-top {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  background: var(--primary-red);
+.modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 80%;
+}
+
+.modal-content img {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.close-modal {
+  position: absolute;
+  top: -40px;
+  right: 0;
   color: white;
-  width: 50px;
-  height: 50px;
+  font-size: 2rem;
+  cursor: pointer;
+  background: var(--primary-red);
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  cursor: pointer;
-  z-index: 100;
-  box-shadow: 0 4px 15px rgba(255, 59, 48, 0.4);
-  transition: all 0.3s ease;
-}
-
-.back-to-top:active {
-  transform: scale(0.9);
 }
 
 /* Tablet Styles */
@@ -853,6 +871,11 @@ footer {
   .form-row {
     flex-direction: row;
   }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
 }
 
 /* Desktop Styles */
@@ -867,6 +890,10 @@ footer {
   
   .booty-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 </style>
@@ -1117,6 +1144,14 @@ footer {
   </div>
 </div>
 
+<!-- Image Modal -->
+<div class="image-modal" id="imageModal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeImageModal()">&times;</span>
+    <img id="modalImage" src="" alt="Full Size Image">
+  </div>
+</div>
+
 <footer>
   <div class="container">
     <div class="footer-links">
@@ -1160,32 +1195,39 @@ const easternCapeCities = [
   { name: "Graaff-Reinet", bootyCalls: 0 }
 ];
 
-// Booty Calls Data
+// Booty Calls Data with Bunny's pictures
 const bootyCallsByCity = {
   "East London": [
     {
       id: 1,
       name: "Bunny",
       age: 25,
-      images: ["https://i.ibb.co/ZpBNL8nm/bunny.jpg"], // Your provided image
+      images: ["https://i.ibb.co/ZpBNL8nm/bunny.jpg"], // Your first image
       location: "Quigney, East London",
       price: 800,
       accommodation: true,
       availability: "Monday-Saturday, 8PM-2AM",
       bodyType: "Slim",
       ethnicity: "Black",
-      description: "Sweet and fun-loving, professional booty call with great personality. Always on time and discreet. Speaks English and Xhosa.",
-      features: ["Verified", "Accommodation Available", "Available Now", "Professional"],
+      height: "5'5\"",
+      measurements: "34-24-36",
+      description: "Sweet and fun-loving, professional booty call with great personality. Always on time and discreet. Speaks English and Xhosa. Available for both incall and outcall services.",
+      features: ["Verified", "Accommodation Available", "Available Now", "Professional", "Discreet"],
       
-      // Gallery Images (add more pictures here)
+      // Gallery Images with Bunny's actual pictures
       gallery: [
-        { type: "image", url: "https://i.ibb.co/ZpBNL8nm/bunny.jpg" },
-        { type: "image", url: "https://via.placeholder.com/600x400/ff3b30/ffffff?text=Bunny+2" },
-        { type: "image", url: "https://via.placeholder.com/600x400/ff6b6b/ffffff?text=Bunny+3" },
-        { type: "video", url: "#", thumbnail: "https://via.placeholder.com/600x400/9b59b6/ffffff?text=Video+1" },
-        { type: "image", url: "https://via.placeholder.com/600x400/3498db/ffffff?text=Bunny+4" },
-        { type: "image", url: "https://via.placeholder.com/600x400/2ecc71/ffffff?text=Bunny+5" }
+        { type: "image", url: "https://i.ibb.co/ZpBNL8nm/bunny.jpg", title: "Bunny - Main Photo" },
+        { type: "image", url: "https://i.ibb.co/wZGXzb2F/bunny2.jpg", title: "Bunny - Photo 2" },
+        { type: "image", url: "https://i.ibb.co/93Bz2g6P/bunny3.jpg", title: "Bunny - Photo 3" },
+        { type: "image", url: "https://via.placeholder.com/600x400/ff6b6b/ffffff?text=Bunny+4", title: "Bunny - Photo 4" },
+        { type: "image", url: "https://via.placeholder.com/600x400/3498db/ffffff?text=Bunny+5", title: "Bunny - Photo 5" },
+        { type: "video", url: "#", thumbnail: "https://via.placeholder.com/600x400/9b59b6/ffffff?text=Video+Preview", title: "Verification Video" }
       ],
+      
+      // Additional Details
+      services: ["GFE (Girlfriend Experience)", "Dinner Dates", "Overnight", "Roleplay"],
+      languages: ["English", "Xhosa"],
+      personality: ["Friendly", "Outgoing", "Good Listener", "Discreet"],
       
       // Ratings and Reviews
       rating: 4.8,
@@ -1201,19 +1243,25 @@ const bootyCallsByCity = {
           name: "David",
           date: "2023-10-10",
           rating: 5,
-          comment: "Great experience. Bunny is sweet and knows how to have a good time."
+          comment: "Great experience. Bunny is sweet and knows how to have a good time. Very discreet and professional."
         },
         {
           name: "John",
           date: "2023-10-05",
           rating: 4,
-          comment: "Good service, arrived on time. Will book again next month."
+          comment: "Good service, arrived on time. Accommodation was clean and comfortable. Will book again next month."
         },
         {
           name: "Thabo",
           date: "2023-09-28",
           rating: 5,
-          comment: "Best booty call in East London! Highly recommended."
+          comment: "Best booty call in East London! Bunny made me feel comfortable from the start. Highly recommended."
+        },
+        {
+          name: "Sipho",
+          date: "2023-09-20",
+          rating: 5,
+          comment: "Very professional. Great communication and exactly as described in the photos. 5 stars!"
         }
       ]
     }
@@ -1340,7 +1388,7 @@ function viewBootyProfile(bootyCallId) {
     // Generate gallery HTML
     const galleryHTML = bootyCall.gallery.map((item, index) => `
       <div class="gallery-item ${item.type}" onclick="viewImage(${index})">
-        <img src="${item.type === 'video' ? item.thumbnail : item.url}" alt="${bootyCall.name} ${index + 1}" loading="lazy">
+        <img src="${item.type === 'video' ? item.thumbnail : item.url}" alt="${item.title || bootyCall.name + ' ' + (index + 1)}" loading="lazy">
       </div>
     `).join('');
     
@@ -1358,6 +1406,13 @@ function viewBootyProfile(bootyCallId) {
       </div>
     `).join('');
     
+    // Generate services HTML
+    const servicesHTML = bootyCall.services.map(service => `
+      <span style="display: inline-block; background: rgba(255, 59, 48, 0.1); color: var(--primary-red); padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; margin: 2px;">
+        ${service}
+      </span>
+    `).join('');
+    
     const profileHTML = `
       <div class="booty-card featured">
         <img src="${bootyCall.images[0]}" alt="${bootyCall.name}" class="booty-img">
@@ -1368,18 +1423,60 @@ function viewBootyProfile(bootyCallId) {
             <span style="color: var(--accent-gold);">${bootyCall.bodyType} • ${bootyCall.ethnicity}</span>
           </div>
           
+          <!-- Physical Stats -->
           <div style="margin: 15px 0; padding: 12px; background: rgba(255, 59, 48, 0.05); border-radius: 8px;">
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px;">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+              <div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2px;">Height</p>
+                <p style="color: var(--text-light); font-size: 0.9rem; font-weight: 600;">${bootyCall.height}</p>
+              </div>
+              <div>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 2px;">Measurements</p>
+                <p style="color: var(--text-light); font-size: 0.9rem; font-weight: 600;">${bootyCall.measurements}</p>
+              </div>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">
               <i class="far fa-clock"></i> <strong>Availability:</strong> ${bootyCall.availability}
             </p>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">
               <i class="fas fa-home"></i> <strong>Accommodation:</strong> ${bootyCall.accommodation ? 'Available' : 'Not available'}
             </p>
           </div>
           
+          <!-- Description -->
           <p style="font-size: 0.9rem; color: var(--text-light); margin: 15px 0; line-height: 1.5;">
             ${bootyCall.description}
           </p>
+          
+          <!-- Services Offered -->
+          <div style="margin: 15px 0;">
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px;">
+              <i class="fas fa-heart"></i> <strong>Services Offered:</strong>
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+              ${servicesHTML}
+            </div>
+          </div>
+          
+          <!-- Languages & Personality -->
+          <div style="margin: 15px 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+            <div>
+              <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px;">
+                <i class="fas fa-language"></i> <strong>Languages:</strong>
+              </p>
+              <p style="color: var(--text-light); font-size: 0.85rem;">
+                ${bootyCall.languages.join(', ')}
+              </p>
+            </div>
+            <div>
+              <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px;">
+                <i class="fas fa-user"></i> <strong>Personality:</strong>
+              </p>
+              <p style="color: var(--text-light); font-size: 0.85rem;">
+                ${bootyCall.personality.join(', ')}
+              </p>
+            </div>
+          </div>
           
           <div class="booty-features">
             ${bootyCall.features.map(feature => {
@@ -1408,7 +1505,7 @@ function viewBootyProfile(bootyCallId) {
           ${galleryHTML}
         </div>
         <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 10px;">
-          Tap to view larger
+          Tap any photo to view full size
         </p>
       </div>
       
@@ -1462,6 +1559,28 @@ function generateStars(rating) {
   return starsHTML;
 }
 
+// View image in modal
+function viewImage(index) {
+  const bootyCall = bookingData.selectedBooty;
+  if (bootyCall && bootyCall.gallery[index]) {
+    const item = bootyCall.gallery[index];
+    if (item.type === 'video') {
+      alert('Video preview would play here. In a real app, this would open a video player.');
+    } else {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      modalImage.src = item.url;
+      modalImage.alt = item.title || `Photo ${index + 1}`;
+      modal.style.display = 'flex';
+    }
+  }
+}
+
+// Close image modal
+function closeImageModal() {
+  document.getElementById('imageModal').style.display = 'none';
+}
+
 // Start booking process
 function startBooking(bootyCallId) {
   const city = bookingData.selectedCity;
@@ -1476,20 +1595,6 @@ function startBooking(bootyCallId) {
     bookingData.price = bootyCall.price;
     
     goToStep(4);
-  }
-}
-
-// View image in gallery
-function viewImage(index) {
-  const bootyCall = bookingData.selectedBooty;
-  if (bootyCall && bootyCall.gallery[index]) {
-    const item = bootyCall.gallery[index];
-    if (item.type === 'video') {
-      alert('Video preview would play here. In a real app, this would open a video player.');
-    } else {
-      // In a real app, this would open a lightbox
-      window.open(item.url, '_blank');
-    }
   }
 }
 
@@ -1632,6 +1737,13 @@ function goToStep(step) {
 document.getElementById('back-to-search').addEventListener('click', () => goToStep(1));
 document.getElementById('back-to-profile').addEventListener('click', () => goToStep(3));
 
+// Close modal when clicking outside
+document.getElementById('imageModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeImageModal();
+  }
+});
+
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
   initializeCities();
@@ -1644,34 +1756,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Set default start time
   document.getElementById('start-time').value = '20:00';
   calculateEndTime();
-  
-  // Mobile gestures
-  let touchStartX = 0;
-  let touchEndX = 0;
-  
-  document.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-  
-  document.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  });
-  
-  function handleSwipe() {
-    const swipeThreshold = 50;
-    const swipeDistance = touchEndX - touchStartX;
-    
-    if (Math.abs(swipeDistance) > swipeThreshold) {
-      if (swipeDistance > 0 && currentStep > 1) {
-        // Swipe right - go back
-        goToStep(currentStep - 1);
-      } else if (swipeDistance < 0 && currentStep < 4) {
-        // Swipe left - go forward
-        goToStep(currentStep + 1);
-      }
-    }
-  }
   
   // Track current step
   let currentStep = 1;
@@ -1690,7 +1774,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Simple step tracking for swipe
+// Simple step tracking
 let currentStep = 1;
 function goToStep(step) {
   document.querySelectorAll('.step-container').forEach(container => {
