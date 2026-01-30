@@ -592,7 +592,7 @@ input:checked + .toggle-slider:before {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Public Site Styles (Kept from previous version) */
+/* Public Site Styles */
 .container {
   max-width: 100%;
   margin: 0 auto;
@@ -657,18 +657,6 @@ header {
   text-align: center;
 }
 
-.location-badge {
-  background: linear-gradient(45deg, var(--primary-red), #ff6b6b);
-  color: white;
-  padding: 6px 15px;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  margin-top: 8px;
-  display: inline-block;
-}
-
-/* Admin Login Button */
 .admin-login-btn {
   background: linear-gradient(45deg, var(--admin-purple), #8e44ad);
   color: white;
@@ -725,7 +713,404 @@ header {
   background-color: var(--primary-red);
 }
 
-/* ... Rest of your previous CSS styles for public site ... */
+/* City Search and Grid Styles */
+.search-container {
+  padding: 15px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.search-box {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 50px 16px 20px;
+  background: var(--light-gray);
+  border: 2px solid var(--medium-gray);
+  border-radius: 12px;
+  color: var(--text-light);
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 18px;
+}
+
+.city-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.city-card {
+  background: var(--medium-gray);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.city-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-red);
+  box-shadow: 0 10px 20px rgba(255, 59, 48, 0.2);
+}
+
+.city-card i {
+  font-size: 2rem;
+  color: var(--primary-red);
+  margin-bottom: 10px;
+}
+
+.city-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.booty-count {
+  font-size: 0.9rem;
+  color: var(--accent-gold);
+  background: rgba(255, 215, 0, 0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.city-card[style*="display: none"] {
+  display: none !important;
+}
+
+/* Booty Call Cards */
+.booty-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.booty-card {
+  background: var(--medium-gray);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.booty-card.featured {
+  border-color: var(--accent-gold);
+  position: relative;
+}
+
+.booty-card.featured::before {
+  content: "PREMIUM";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: var(--accent-gold);
+  color: var(--black);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  z-index: 1;
+}
+
+.booty-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.booty-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.booty-info {
+  padding: 20px;
+}
+
+.booty-name {
+  font-size: 1.3rem;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.booty-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.booty-location {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.booty-location::before {
+  content: "📍";
+  font-size: 0.8rem;
+}
+
+.booty-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.feature-tag {
+  background: rgba(255, 59, 48, 0.1);
+  color: var(--primary-red);
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.feature-tag.accommodation {
+  background: rgba(155, 89, 182, 0.1);
+  color: var(--admin-purple);
+}
+
+.booty-pricing {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--light-gray);
+}
+
+.price-tag {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  margin-bottom: 5px;
+}
+
+.price-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Booking Form Styles */
+.booking-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-select {
+  width: 100%;
+  padding: 12px;
+  background: var(--light-gray);
+  border: 1px solid var(--medium-gray);
+  border-radius: 8px;
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: var(--primary-red);
+}
+
+.time-info {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+.selfie-upload {
+  border: 2px dashed var(--primary-red);
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  cursor: pointer;
+  margin-top: 10px;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.selfie-upload:hover {
+  background: rgba(255, 59, 48, 0.05);
+}
+
+.selfie-upload i {
+  font-size: 2.5rem;
+  color: var(--primary-red);
+  margin-bottom: 10px;
+}
+
+#selfiePreview {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  margin-top: 15px;
+  display: none;
+}
+
+.terms-agreement {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 15px;
+  background: var(--medium-gray);
+  border-radius: 8px;
+}
+
+.terms-agreement input {
+  margin-top: 3px;
+}
+
+.payment-box {
+  background: linear-gradient(135deg, var(--dark-gray), var(--medium-gray));
+  border: 2px solid var(--success);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  margin: 25px 0;
+}
+
+.payment-box i {
+  font-size: 2rem;
+  color: var(--success);
+  margin-bottom: 10px;
+}
+
+.pay-button {
+  display: inline-block;
+  background: linear-gradient(45deg, var(--success), #27ae60);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+}
+
+.pay-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+}
+
+/* Footer */
+footer {
+  background: var(--dark-gray);
+  padding: 30px 0;
+  margin-top: 50px;
+  border-top: 2px solid var(--medium-gray);
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--primary-red);
+}
+
+.copyright {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.disclaimer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* Navigation Buttons */
+.btn-back {
+  background: var(--medium-gray);
+  color: var(--text-light);
+  border: 1px solid var(--light-gray);
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background: var(--light-gray);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .city-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .booty-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-links {
+    gap: 15px;
+  }
+  
+  .selfie-upload {
+    padding: 20px;
+  }
+}
 
 /* Tablet Styles */
 @media (min-width: 768px) {
@@ -1706,19 +2091,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Initialize public site (from previous code)
+  // Initialize public site
   initializePublicSite();
 });
 
 // =============================================
-// PUBLIC SITE FUNCTIONS (From Previous Version)
+// PUBLIC SITE FUNCTIONS
 // =============================================
 
 // Data storage for public site
 const bookingData = {
   selectedCity: '',
   selectedBooty: null,
-  price: 900, // Updated to 8 hours price
+  price: 900,
   duration: '8',
   startTime: '',
   endTime: '',
@@ -1733,43 +2118,117 @@ const easternCapeCities = [
   { name: "Qonce (King William's Town)", bootyCalls: 0 }
 ];
 
+// Initialize cities grid
+function initializeCities() {
+  const cityGrid = document.getElementById('cityGrid');
+  if (!cityGrid) return;
+  
+  cityGrid.innerHTML = '';
+  
+  easternCapeCities.forEach(city => {
+    const cityCard = document.createElement('div');
+    cityCard.className = 'city-card';
+    cityCard.innerHTML = `
+      <i class="fas fa-map-marker-alt"></i>
+      <div class="city-name">${city.name}</div>
+      <div class="booty-count">${city.bootyCalls} booty call${city.bootyCalls !== 1 ? 's' : ''}</div>
+    `;
+    
+    cityCard.addEventListener('click', () => {
+      bookingData.selectedCity = city.name;
+      document.getElementById('selectedCityDisplay').textContent = city.name;
+      displayBootyCalls(city.name);
+      goToStep(2);
+    });
+    
+    cityGrid.appendChild(cityCard);
+  });
+}
+
 // Initialize public site
 function initializePublicSite() {
-  // Your existing public site initialization code here
-  // This should include initializeCities(), event listeners, etc.
+  initializeCities();
   
-  // For demo, just set up the cities
-  const cityGrid = document.getElementById('cityGrid');
-  if (cityGrid) {
-    cityGrid.innerHTML = '';
-    
-    easternCapeCities.forEach(city => {
-      const cityCard = document.createElement('div');
-      cityCard.className = 'city-card';
-      cityCard.innerHTML = `
-        <i class="fas fa-map-marker-alt"></i>
-        <div class="city-name">${city.name}</div>
-        <div class="booty-count">${city.bootyCalls} booty call${city.bootyCalls !== 1 ? 's' : ''}</div>
-      `;
+  // Set up city search
+  const citySearch = document.getElementById('citySearch');
+  if (citySearch) {
+    citySearch.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const cityCards = document.querySelectorAll('.city-card');
       
-      cityCard.addEventListener('click', () => {
-        // Handle city selection
-        bookingData.selectedCity = city.name;
-        document.getElementById('selectedCityDisplay').textContent = city.name;
-        // Show Bunny's profile
-        displayBootyCalls(city.name);
-        goToStep(2);
+      cityCards.forEach(card => {
+        const cityName = card.querySelector('.city-name').textContent.toLowerCase();
+        if (cityName.includes(searchTerm)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
       });
-      
-      cityGrid.appendChild(cityCard);
+    });
+  }
+  
+  // Set up navigation buttons
+  const backToSearchBtn = document.getElementById('back-to-search');
+  if (backToSearchBtn) {
+    backToSearchBtn.addEventListener('click', () => goToStep(1));
+  }
+  
+  const backToProfileBtn = document.getElementById('back-to-profile');
+  if (backToProfileBtn) {
+    backToProfileBtn.addEventListener('click', () => goToStep(3));
+  }
+  
+  // Set up booking form
+  setupBookingForm();
+  
+  // Set up selfie upload
+  const selfieUpload = document.getElementById('selfieUpload');
+  const selfieInput = document.getElementById('selfieInput');
+  const selfiePreview = document.getElementById('selfiePreview');
+  
+  if (selfieUpload && selfieInput && selfiePreview) {
+    selfieUpload.addEventListener('click', () => selfieInput.click());
+    
+    selfieInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          selfiePreview.src = e.target.result;
+          selfiePreview.style.display = 'block';
+          bookingData.selfieUploaded = true;
+          
+          // Update upload area text
+          selfieUpload.querySelector('h4').textContent = 'Selfie Uploaded';
+          selfieUpload.querySelector('p').textContent = 'Tap to change photo';
+          selfieUpload.querySelector('i').className = 'fas fa-check-circle';
+          selfieUpload.querySelector('i').style.color = 'var(--success)';
+        };
+        reader.readAsDataURL(file);
+      }
     });
   }
 }
 
-// Display booty calls (simplified for demo)
+// Display booty calls
 function displayBootyCalls(cityName) {
   const bootyGrid = document.getElementById('bootyGrid');
   if (!bootyGrid) return;
+  
+  // Only show Bunny for East London
+  if (cityName !== 'East London') {
+    bootyGrid.innerHTML = `
+      <div style="text-align: center; padding: 40px;">
+        <i class="fas fa-frown" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 20px;"></i>
+        <h3 style="color: var(--text-muted); margin-bottom: 10px;">No Booty Calls Available</h3>
+        <p style="color: var(--text-muted);">No premium booty calls are currently available in ${cityName}.</p>
+        <p style="color: var(--accent-gold); margin-top: 15px;">
+          <i class="fas fa-map-marker-alt"></i> Try searching in East London
+        </p>
+      </div>
+    `;
+    return;
+  }
   
   bootyGrid.innerHTML = `
     <div class="booty-card featured">
@@ -1800,13 +2259,11 @@ function displayBootyCalls(cityName) {
   `;
 }
 
-// View booty profile (simplified)
+// View booty profile
 function viewBootyProfile() {
   bookingData.selectedBooty = bunnyProfile;
-  // Go to step 3 (profile view)
   goToStep(3);
   
-  // Generate profile HTML
   const profileHTML = `
     <div class="booty-card featured">
       <img src="${bunnyProfile.gallery[0]?.url || 'https://i.ibb.co/fY6ddf9x/bunny-new1.jpg'}" alt="${bunnyProfile.name}" class="booty-img">
@@ -1861,7 +2318,61 @@ function viewBootyProfile() {
 function startBooking() {
   document.getElementById('bootyNameDisplay').textContent = bunnyProfile.name;
   document.getElementById('bookingAmount').textContent = bunnyProfile.price;
+  
+  // Set default date to tomorrow
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const formattedDate = tomorrow.toISOString().split('T')[0];
+  document.getElementById('date').value = formattedDate;
+  document.getElementById('date').min = formattedDate;
+  
   goToStep(4);
+}
+
+// Setup booking form
+function setupBookingForm() {
+  const durationSelect = document.getElementById('duration');
+  const startTimeSelect = document.getElementById('start-time');
+  const endTimeDisplay = document.getElementById('endTimeDisplay');
+  const bookingAmount = document.getElementById('bookingAmount');
+  
+  if (durationSelect) {
+    durationSelect.addEventListener('change', function() {
+      const duration = parseInt(this.value);
+      let price = 900;
+      
+      if (duration === 2) price = 500;
+      else if (duration === 4) price = 700;
+      
+      bookingData.price = price;
+      bookingData.duration = duration;
+      bookingAmount.textContent = price;
+      
+      updateEndTime();
+    });
+  }
+  
+  if (startTimeSelect) {
+    startTimeSelect.addEventListener('change', function() {
+      bookingData.startTime = this.value;
+      updateEndTime();
+    });
+  }
+  
+  // Calculate end time
+  function updateEndTime() {
+    if (bookingData.startTime && bookingData.duration) {
+      const [hours, minutes] = bookingData.startTime.split(':').map(Number);
+      const endTime = new Date();
+      endTime.setHours(hours + parseInt(bookingData.duration));
+      endTime.setMinutes(minutes);
+      
+      const endHours = endTime.getHours().toString().padStart(2, '0');
+      const endMinutes = endTime.getMinutes().toString().padStart(2, '0');
+      
+      endTimeDisplay.textContent = `Ends at: ${endHours}:${endMinutes}`;
+    }
+  }
 }
 
 // Navigation functions for public site
