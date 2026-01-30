@@ -124,10 +124,13 @@ body {
   font-weight: 600;
   cursor: pointer;
   margin-top: 10px;
+  transition: all 0.3s ease;
 }
 
 .login-btn:hover {
   background: linear-gradient(45deg, var(--dark-red), var(--primary-red));
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 59, 48, 0.4);
 }
 
 .back-to-site {
@@ -191,6 +194,11 @@ body {
   padding: 8px 15px;
   border-radius: 20px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-logout:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .admin-nav {
@@ -267,9 +275,10 @@ body {
 
 .profile-form .form-label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   color: var(--text-muted);
   font-weight: 600;
+  font-size: 0.9rem;
 }
 
 .profile-form .form-input, 
@@ -282,6 +291,7 @@ body {
   border-radius: 8px;
   color: var(--text-light);
   font-size: 14px;
+  transition: all 0.3s ease;
 }
 
 .profile-form .form-textarea {
@@ -294,6 +304,7 @@ body {
 .profile-form .form-textarea:focus {
   outline: none;
   border-color: var(--admin-purple);
+  box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.1);
 }
 
 /* Availability Toggle */
@@ -370,6 +381,7 @@ input:checked + .toggle-slider:before {
 
 .service-checkbox:hover {
   border-color: var(--admin-purple);
+  transform: translateY(-2px);
 }
 
 .service-checkbox.selected {
@@ -394,6 +406,7 @@ input:checked + .toggle-slider:before {
 
 .upload-area:hover {
   background: rgba(155, 89, 182, 0.05);
+  border-color: #8e44ad;
 }
 
 .upload-area i {
@@ -436,6 +449,12 @@ input:checked + .toggle-slider:before {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.gallery-item .delete-btn:hover {
+  background: #c0392b;
+  transform: scale(1.1);
 }
 
 /* Reviews Management */
@@ -481,11 +500,12 @@ input:checked + .toggle-slider:before {
 }
 
 .reply-btn, .delete-btn {
-  padding: 5px 12px;
+  padding: 6px 15px;
   border-radius: 15px;
   border: none;
   cursor: pointer;
   font-size: 0.85rem;
+  transition: all 0.3s ease;
 }
 
 .reply-btn {
@@ -493,9 +513,19 @@ input:checked + .toggle-slider:before {
   color: white;
 }
 
+.reply-btn:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
 .delete-btn {
   background: var(--warning);
   color: white;
+}
+
+.delete-btn:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
 }
 
 .reply-form {
@@ -527,6 +557,12 @@ input:checked + .toggle-slider:before {
   border-radius: 10px;
   padding: 20px;
   text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .stat-number {
@@ -549,31 +585,52 @@ input:checked + .toggle-slider:before {
   cursor: pointer;
   font-weight: 600;
   transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .btn-primary {
-  background: var(--admin-purple);
+  background: linear-gradient(45deg, var(--admin-purple), #8e44ad);
   color: white;
 }
 
 .btn-primary:hover {
-  background: #8e44ad;
+  background: linear-gradient(45deg, #8e44ad, var(--admin-purple));
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
 }
 
 .btn-success {
-  background: var(--success);
+  background: linear-gradient(45deg, var(--success), #27ae60);
   color: white;
 }
 
+.btn-success:hover {
+  background: linear-gradient(45deg, #27ae60, var(--success));
+  transform: translateY(-2px);
+}
+
 .btn-danger {
-  background: var(--warning);
+  background: linear-gradient(45deg, var(--warning), #c0392b);
   color: white;
+}
+
+.btn-danger:hover {
+  background: linear-gradient(45deg, #c0392b, var(--warning));
+  transform: translateY(-2px);
 }
 
 .btn-secondary {
   background: var(--medium-gray);
   color: var(--text-light);
   border: 1px solid var(--light-gray);
+}
+
+.btn-secondary:hover {
+  background: var(--light-gray);
+  transform: translateY(-2px);
 }
 
 /* Save Status */
@@ -590,6 +647,12 @@ input:checked + .toggle-slider:before {
   gap: 10px;
   z-index: 2000;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
 /* Public Site Styles */
@@ -611,11 +674,22 @@ header {
   -webkit-backdrop-filter: blur(10px);
 }
 
-.logo-container {
+.header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
+  position: relative;
+  min-height: 70px;
+}
+
+/* Center Logo Container */
+.center-logo-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: auto;
 }
 
 .logo {
@@ -627,10 +701,11 @@ header {
   text-shadow: 0 0 10px rgba(255, 59, 48, 0.5);
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .logo i {
-  margin-right: 10px;
   font-size: 2rem;
   color: var(--primary-red);
 }
@@ -655,19 +730,29 @@ header {
   font-weight: 600;
   letter-spacing: 0.5px;
   text-align: center;
+  margin-top: 5px;
 }
 
-.admin-login-btn {
+/* Login Button on Right */
+.login-btn-header {
   background: linear-gradient(45deg, var(--admin-purple), #8e44ad);
   color: white;
   border: none;
-  padding: 8px 15px;
+  padding: 10px 20px;
   border-radius: 20px;
   font-size: 0.9rem;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
+  margin-left: auto;
+  transition: all 0.3s ease;
+}
+
+.login-btn-header:hover {
+  background: linear-gradient(45deg, #8e44ad, var(--admin-purple));
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
 }
 
 /* Main Content */
@@ -920,31 +1005,75 @@ header {
   color: var(--text-muted);
 }
 
-/* Booking Form Styles */
+/* Booking Form Styles - MODERN FIXED VERSION */
 .booking-form {
   max-width: 600px;
   margin: 0 auto;
 }
 
-.form-select {
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .form-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.booking-form .form-group {
+  margin-bottom: 20px;
+}
+
+.booking-form .form-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-light);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.booking-form .form-input,
+.booking-form .form-select {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   background: var(--light-gray);
-  border: 1px solid var(--medium-gray);
+  border: 2px solid var(--medium-gray);
   border-radius: 8px;
   color: var(--text-light);
   font-size: 14px;
+  transition: all 0.3s ease;
 }
 
-.form-select:focus {
+.booking-form textarea.form-input {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.booking-form .form-input:focus,
+.booking-form .form-select:focus {
   outline: none;
   border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1);
+}
+
+.booking-form .form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23aaaaaa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
 }
 
 .time-info {
   font-size: 0.85rem;
   color: var(--text-muted);
   margin-top: 5px;
+  padding-left: 5px;
 }
 
 .selfie-upload {
@@ -961,10 +1090,12 @@ header {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .selfie-upload:hover {
   background: rgba(255, 59, 48, 0.05);
+  border-color: #ff6b6b;
 }
 
 .selfie-upload i {
@@ -979,48 +1110,69 @@ header {
   border-radius: 8px;
   margin-top: 15px;
   display: none;
+  object-fit: cover;
 }
 
 .terms-agreement {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  margin: 20px 0;
-  padding: 15px;
-  background: var(--medium-gray);
+  gap: 12px;
+  margin: 25px 0;
+  padding: 20px;
+  background: rgba(255, 59, 48, 0.05);
   border-radius: 8px;
+  border: 1px solid rgba(255, 59, 48, 0.1);
 }
 
 .terms-agreement input {
   margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.terms-agreement label {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  cursor: pointer;
+  flex: 1;
 }
 
 .payment-box {
   background: linear-gradient(135deg, var(--dark-gray), var(--medium-gray));
   border: 2px solid var(--success);
   border-radius: 12px;
-  padding: 20px;
+  padding: 25px;
   text-align: center;
-  margin: 25px 0;
+  margin: 30px 0;
+  transition: all 0.3s ease;
+}
+
+.payment-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(39, 174, 96, 0.2);
 }
 
 .payment-box i {
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: var(--success);
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .pay-button {
   display: inline-block;
   background: linear-gradient(45deg, var(--success), #27ae60);
   color: white;
-  padding: 15px 30px;
+  padding: 16px 32px;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1rem;
   margin-top: 15px;
   transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
 }
 
 .pay-button:hover {
@@ -1039,7 +1191,7 @@ footer {
 .footer-links {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
   flex-wrap: wrap;
   margin-bottom: 20px;
 }
@@ -1049,12 +1201,16 @@ footer {
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 5px;
-  transition: color 0.3s ease;
+  gap: 8px;
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 8px;
 }
 
 .footer-links a:hover {
   color: var(--primary-red);
+  background: rgba(255, 59, 48, 0.1);
+  transform: translateY(-2px);
 }
 
 .copyright {
@@ -1069,6 +1225,9 @@ footer {
   color: var(--text-muted);
   font-size: 0.8rem;
   font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.4;
 }
 
 /* Navigation Buttons */
@@ -1081,16 +1240,21 @@ footer {
   cursor: pointer;
   font-weight: 600;
   transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-back:hover {
   background: var(--light-gray);
+  transform: translateY(-2px);
 }
 
 .button-container {
   display: flex;
   justify-content: center;
   margin-top: 30px;
+  gap: 15px;
 }
 
 /* Mobile Responsive */
@@ -1109,6 +1273,35 @@ footer {
   
   .selfie-upload {
     padding: 20px;
+  }
+  
+  .header-container {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    min-height: auto;
+  }
+  
+  .center-logo-container {
+    position: relative;
+    left: 0;
+    transform: none;
+    order: 1;
+    margin: 10px 0;
+  }
+  
+  .login-btn-header {
+    order: 2;
+    margin-left: 0;
+    align-self: flex-end;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .payment-box {
+    padding: 20px 15px;
   }
 }
 
@@ -1148,8 +1341,8 @@ footer {
       <i class="fas fa-fire"></i> Water Flow Admin
     </div>
     <div class="login-box">
-      <h2 class="login-title">Provider Login</h2>
-      <p class="login-subtitle">Manage your profile, photos, and bookings</p>
+      <h2 class="login-title">Login</h2>
+      <p class="login-subtitle">Access your dashboard to manage your profile</p>
       
       <form class="login-form" id="loginForm">
         <div class="form-group">
@@ -1226,7 +1419,7 @@ footer {
       </div>
       
       <div style="margin-top: 30px;">
-        <h3>Quick Actions</h3>
+        <h3 style="color: var(--text-light); margin-bottom: 15px;">Quick Actions</h3>
         <div style="display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
           <button class="btn btn-primary" onclick="switchSection('profile')">
             <i class="fas fa-user-edit"></i> Edit Profile
@@ -1324,13 +1517,13 @@ Sweet and fun-loving, professional booty call with great personality. Always on 
       
       <div class="upload-area" onclick="document.getElementById('galleryUpload').click()">
         <i class="fas fa-cloud-upload-alt"></i>
-        <h3>Click to Upload Photos or Videos</h3>
+        <h3>Click to Upload Photos</h3>
         <p style="color: var(--text-muted);">Upload new pictures to keep your gallery fresh and engaging</p>
-        <input type="file" id="galleryUpload" accept="image/*,video/*" multiple style="display: none;">
+        <input type="file" id="galleryUpload" accept="image/*" multiple style="display: none;">
       </div>
       
       <div>
-        <h3>Current Gallery</h3>
+        <h3 style="color: var(--text-light); margin: 20px 0 15px;">Current Gallery</h3>
         <p style="color: var(--text-muted); margin-bottom: 15px;">
           Click on any photo to set as main profile picture
         </p>
@@ -1413,16 +1606,19 @@ Advance booking recommended
 <div id="publicSite">
   <header>
     <div class="container">
-      <div class="logo-container">
-        <div>
+      <div class="header-container">
+        <!-- Logo Container (Centered) -->
+        <div class="center-logo-container">
           <div class="logo">
             <i class="fas fa-fire"></i>
             <div class="logo-text">Water Flow</div>
           </div>
           <div class="slogan">Eastern Cape Premium Booty Call Service</div>
         </div>
-        <button class="admin-login-btn" onclick="showLoginPage()">
-          <i class="fas fa-user-lock"></i> Provider Login
+        
+        <!-- Login Button (Right Side) -->
+        <button class="login-btn-header" onclick="showLoginPage()">
+          <i class="fas fa-user-lock"></i> Login
         </button>
       </div>
     </div>
@@ -1486,7 +1682,7 @@ Advance booking recommended
       <div class="step-container" id="step4">
         <h2 class="step-title">Book <span id="bootyNameDisplay"></span></h2>
         
-        <div class="booking-form">
+        <form class="booking-form" id="bookingForm" onsubmit="return validateBookingForm(event)">
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="full-name">Full Name *</label>
@@ -1551,7 +1747,7 @@ Advance booking recommended
               <p style="color: var(--text-muted); font-size: 0.85rem;">
                 Take a selfie now to verify you're a real person
               </p>
-              <input type="file" id="selfieInput" accept="image/*" capture="user" style="display: none;">
+              <input type="file" id="selfieInput" accept="image/*" style="display: none;">
               <img id="selfiePreview" alt="Selfie Preview">
             </div>
             <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 10px;">
@@ -1588,8 +1784,11 @@ Advance booking recommended
           
           <div class="button-container">
             <button type="button" class="btn btn-back" id="back-to-profile">Back to Profile</button>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-check-circle"></i> Submit Booking
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -1793,7 +1992,7 @@ function loadAdminData() {
   loadStats();
 }
 
-// Load gallery
+// Load gallery - FIXED UPLOAD FUNCTION
 function loadGallery() {
   const galleryPreview = document.getElementById('galleryPreview');
   galleryPreview.innerHTML = '';
@@ -1803,14 +2002,14 @@ function loadGallery() {
     galleryItem.className = 'gallery-item';
     
     galleryItem.innerHTML = `
-      <img src="${item.url}" alt="${item.title}">
+      <img src="${item.url}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/150/333/ffffff?text=Photo+${index+1}'">
       <button class="delete-btn" onclick="deleteGalleryItem(${index})">
         <i class="fas fa-times"></i>
       </button>
     `;
     
     galleryItem.addEventListener('click', (e) => {
-      if (e.target.classList.contains('delete-btn')) return;
+      if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) return;
       // Set as main image
       const mainImage = bunnyProfile.gallery[index];
       bunnyProfile.gallery.splice(index, 1);
@@ -1859,8 +2058,10 @@ function loadReviews() {
       </div>
       <div class="reply-form" id="replyForm-${review.id}">
         <textarea id="replyText-${review.id}" placeholder="Type your reply here..." rows="3"></textarea>
-        <button class="btn btn-primary" onclick="submitReply(${review.id})">Send Reply</button>
-        <button class="btn btn-secondary" onclick="hideReplyForm(${review.id})">Cancel</button>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-primary" onclick="submitReply(${review.id})">Send Reply</button>
+          <button class="btn btn-secondary" onclick="hideReplyForm(${review.id})">Cancel</button>
+        </div>
       </div>
     `;
     
@@ -1896,8 +2097,8 @@ function loadServices() {
     const serviceItem = document.createElement('div');
     serviceItem.className = `service-checkbox ${isSelected ? 'selected' : ''}`;
     serviceItem.innerHTML = `
-      <label>
-        <input type="checkbox" ${isSelected ? 'checked' : ''} value="${service}">
+      <label style="display: flex; align-items: center; cursor: pointer;">
+        <input type="checkbox" ${isSelected ? 'checked' : ''} value="${service}" style="margin-right: 10px;">
         ${service}
       </label>
     `;
@@ -1916,7 +2117,7 @@ function loadServices() {
 // Load stats
 function loadStats() {
   document.getElementById('totalBookings').textContent = bunnyProfile.stats.totalBookings;
-  document.getElementById('totalEarnings').textContent = `R${bunnyProfile.stats.totalEarnings}`;
+  document.getElementById('totalEarnings').textContent = `R${bunnyProfile.stats.totalEarnings.toLocaleString()}`;
   document.getElementById('ratingScore').textContent = bunnyProfile.stats.rating;
   document.getElementById('totalReviews').textContent = bunnyProfile.stats.totalReviews;
 }
@@ -2025,27 +2226,43 @@ function deleteGalleryItem(index) {
   }
 }
 
-// Handle gallery upload
+// Handle gallery upload - FIXED UPLOAD FUNCTION
 document.getElementById('galleryUpload').addEventListener('change', function(e) {
   const files = e.target.files;
   if (files.length > 0) {
-    // In a real app, you would upload to a server
-    // For demo, we'll simulate upload with placeholder
+    // Show upload status
+    showSaveStatus('Uploading images...');
+    
+    // Process each file
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+      
+      // Check if it's an image
+      if (!file.type.startsWith('image/')) {
+        alert(`File "${file.name}" is not an image. Please upload only images.`);
+        continue;
+      }
+      
       const reader = new FileReader();
       
       reader.onload = function(e) {
+        // Create a unique ID for the image
+        const imageId = Date.now() + Math.random().toString(36).substr(2, 9);
         const newImage = {
-          type: file.type.startsWith('video') ? 'video' : 'image',
+          type: 'image',
           url: e.target.result,
-          title: `New ${file.type.startsWith('video') ? 'Video' : 'Photo'}`
+          title: `New Photo ${bunnyProfile.gallery.length + 1}`,
+          id: imageId
         };
         
         bunnyProfile.gallery.push(newImage);
         localStorage.setItem('bunnyProfile', JSON.stringify(bunnyProfile));
         loadGallery();
-        showSaveStatus('New media uploaded!');
+        showSaveStatus(`Uploaded ${files.length} image${files.length > 1 ? 's' : ''}!`);
+      };
+      
+      reader.onerror = function() {
+        alert(`Error reading file: ${file.name}`);
       };
       
       reader.readAsDataURL(file);
@@ -2069,8 +2286,6 @@ function showSaveStatus(message) {
 
 // Refresh public site with updated data
 function refreshPublicSite() {
-  // This function would refresh the public site with updated data
-  // For now, we'll just reload the booty calls display
   if (typeof displayBootyCalls === 'function') {
     displayBootyCalls(bookingData.selectedCity || 'East London');
   }
@@ -2081,7 +2296,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // Load saved profile from localStorage
   const savedProfile = localStorage.getItem('bunnyProfile');
   if (savedProfile) {
-    bunnyProfile = JSON.parse(savedProfile);
+    try {
+      bunnyProfile = JSON.parse(savedProfile);
+    } catch (e) {
+      console.error('Error parsing saved profile:', e);
+      // Keep default profile if error
+    }
   }
   
   // Set up admin navigation
@@ -2192,6 +2412,12 @@ function initializePublicSite() {
     selfieInput.addEventListener('change', function(e) {
       const file = e.target.files[0];
       if (file) {
+        // Check if it's an image
+        if (!file.type.startsWith('image/')) {
+          alert('Please select an image file');
+          return;
+        }
+        
         const reader = new FileReader();
         reader.onload = function(e) {
           selfiePreview.src = e.target.result;
@@ -2207,6 +2433,16 @@ function initializePublicSite() {
         reader.readAsDataURL(file);
       }
     });
+  }
+  
+  // Set default date to tomorrow
+  const dateInput = document.getElementById('date');
+  if (dateInput) {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const formattedDate = tomorrow.toISOString().split('T')[0];
+    dateInput.min = formattedDate;
+    dateInput.value = formattedDate;
   }
 }
 
@@ -2232,7 +2468,7 @@ function displayBootyCalls(cityName) {
   
   bootyGrid.innerHTML = `
     <div class="booty-card featured">
-      <img src="${bunnyProfile.gallery[0]?.url || 'https://i.ibb.co/fY6ddf9x/bunny-new1.jpg'}" alt="Bunny" class="booty-img">
+      <img src="${bunnyProfile.gallery[0]?.url || 'https://via.placeholder.com/300x200/333/ffffff?text=Bunny+Profile'}" alt="Bunny" class="booty-img" onerror="this.src='https://via.placeholder.com/300x200/333/ffffff?text=Bunny+Profile'">
       <div class="booty-info">
         <h3 class="booty-name">${bunnyProfile.name}, ${bunnyProfile.age}</h3>
         <div class="booty-details">
@@ -2251,8 +2487,8 @@ function displayBootyCalls(cityName) {
           <div class="price-tag">R${bunnyProfile.price}</div>
           <p class="price-note">8 Hours Premium Service</p>
         </div>
-        <button class="btn" style="width: 100%; margin-top: 12px;" onclick="viewBootyProfile()">
-          View Profile & Book
+        <button class="btn btn-primary" style="width: 100%; margin-top: 12px;" onclick="viewBootyProfile()">
+          <i class="fas fa-user-circle"></i> View Profile & Book
         </button>
       </div>
     </div>
@@ -2266,7 +2502,7 @@ function viewBootyProfile() {
   
   const profileHTML = `
     <div class="booty-card featured">
-      <img src="${bunnyProfile.gallery[0]?.url || 'https://i.ibb.co/fY6ddf9x/bunny-new1.jpg'}" alt="${bunnyProfile.name}" class="booty-img">
+      <img src="${bunnyProfile.gallery[0]?.url || 'https://via.placeholder.com/300x200/333/ffffff?text=Bunny+Profile'}" alt="${bunnyProfile.name}" class="booty-img" onerror="this.src='https://via.placeholder.com/300x200/333/ffffff?text=Bunny+Profile'">
       <div class="booty-info">
         <h3 class="booty-name">${bunnyProfile.name}, ${bunnyProfile.age}</h3>
         <div class="booty-details">
@@ -2303,8 +2539,8 @@ function viewBootyProfile() {
         <div class="booty-pricing">
           <div class="price-tag">R${bunnyProfile.price}</div>
           <p class="price-note">8 Hours Premium Service with accommodation</p>
-          <button class="btn" style="width: 100%; margin-top: 15px;" onclick="startBooking()">
-            Book Premium Service - R${bunnyProfile.price}
+          <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="startBooking()">
+            <i class="fas fa-calendar-check"></i> Book Premium Service - R${bunnyProfile.price}
           </button>
         </div>
       </div>
@@ -2318,14 +2554,6 @@ function viewBootyProfile() {
 function startBooking() {
   document.getElementById('bootyNameDisplay').textContent = bunnyProfile.name;
   document.getElementById('bookingAmount').textContent = bunnyProfile.price;
-  
-  // Set default date to tomorrow
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const formattedDate = tomorrow.toISOString().split('T')[0];
-  document.getElementById('date').value = formattedDate;
-  document.getElementById('date').min = formattedDate;
-  
   goToStep(4);
 }
 
@@ -2373,6 +2601,32 @@ function setupBookingForm() {
       endTimeDisplay.textContent = `Ends at: ${endHours}:${endMinutes}`;
     }
   }
+}
+
+// Validate booking form
+function validateBookingForm(event) {
+  event.preventDefault();
+  
+  // Check if selfie is uploaded
+  if (!bookingData.selfieUploaded) {
+    alert('Please upload a selfie for verification');
+    return false;
+  }
+  
+  // Check if terms are accepted
+  const termsCheckbox = document.getElementById('terms');
+  if (!termsCheckbox.checked) {
+    alert('You must agree to the terms and conditions');
+    return false;
+  }
+  
+  // All validations passed - show payment success message
+  alert('Form submitted successfully! You will now be redirected to the payment page.');
+  
+  // In a real app, you would submit the form to a server
+  // For demo purposes, we'll just proceed to payment
+  
+  return true;
 }
 
 // Navigation functions for public site
