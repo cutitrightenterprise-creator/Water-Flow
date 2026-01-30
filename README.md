@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -269,7 +269,7 @@ header {
 }
 
 .booty-card.featured::before {
-  content: 'POPULAR';
+  content: 'AVAILABLE NOW';
   position: absolute;
   top: 10px;
   right: -35px;
@@ -284,7 +284,7 @@ header {
 
 .booty-img {
   width: 100%;
-  height: 200px;
+  height: 250px;
   object-fit: cover;
   border-bottom: 2px solid var(--primary-red);
 }
@@ -299,10 +299,21 @@ header {
   margin-bottom: 5px;
 }
 
-.booty-location {
+.booty-details {
   color: var(--text-muted);
   font-size: 0.9rem;
   margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.booty-location {
+  background: rgba(255, 59, 48, 0.2);
+  color: var(--primary-red);
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
 }
 
 .booty-features {
@@ -468,6 +479,7 @@ header {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
 }
 
 .pay-button:hover {
@@ -710,6 +722,7 @@ footer {
       
       <div class="booty-grid" id="bootyGrid">
         <!-- Booty calls will be populated by JavaScript -->
+        <!-- Add your booty calls information here in the JavaScript section -->
       </div>
       
       <div class="button-container">
@@ -778,9 +791,9 @@ footer {
             <label class="form-label" for="duration">Duration *</label>
             <select id="duration" class="form-select" required>
               <option value="">Select duration</option>
-              <option value="2">2 Hours</option>
-              <option value="4">4 Hours</option>
-              <option value="6">6 Hours</option>
+              <option value="2">2 Hours - R400</option>
+              <option value="4">4 Hours - R600</option>
+              <option value="6">6 Hours - R800</option>
             </select>
           </div>
         </div>
@@ -821,9 +834,12 @@ footer {
           <p style="font-size: 1.2rem; color: var(--accent-gold); margin: 10px 0;">
             Amount: R<span id="bookingAmount">800</span>
           </p>
-          <button class="pay-button" id="payNowBtn">
+          <a href="https://securepay.ikhokha.com/fgx22b1yj70w2bn" target="_blank" class="pay-button" id="payNowBtn">
             <i class="fas fa-credit-card"></i> Pay Now
-          </button>
+          </a>
+          <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-muted);">
+            You will be redirected to our secure payment gateway
+          </p>
         </div>
         
         <div class="button-container">
@@ -922,134 +938,101 @@ const bookingData = {
 
 // Eastern Cape Cities (comprehensive list)
 const easternCapeCities = [
-  { name: "East London", bootyCalls: 8 },
-  { name: "Gqeberha (Port Elizabeth)", bootyCalls: 6 },
-  { name: "Mthatha", bootyCalls: 4 },
-  { name: "Qonce (King William's Town)", bootyCalls: 3 },
-  { name: "Bhisho", bootyCalls: 2 },
-  { name: "Graaff-Reinet", bootyCalls: 2 },
-  { name: "Jeffrey's Bay", bootyCalls: 3 },
-  { name: "Stutterheim", bootyCalls: 2 },
-  { name: "Somerset East", bootyCalls: 1 },
-  { name: "Cradock", bootyCalls: 2 },
-  { name: "Aliwal North", bootyCalls: 2 },
-  { name: "Maclear", bootyCalls: 1 },
-  { name: "Butterworth", bootyCalls: 2 },
-  { name: "Lady Frere", bootyCalls: 1 },
-  { name: "Port Alfred", bootyCalls: 3 },
-  { name: "Kenton-on-Sea", bootyCalls: 2 },
-  { name: "St Francis Bay", bootyCalls: 2 },
-  { name: "Patensie", bootyCalls: 1 },
-  { name: "Kirkwood", bootyCalls: 1 },
-  { name: "Uitenhage", bootyCalls: 3 },
-  { name: "Despatch", bootyCalls: 2 },
-  { name: "Adelaide", bootyCalls: 1 },
-  { name: "Bedford", bootyCalls: 1 },
-  { name: "Fort Beaufort", bootyCalls: 2 },
-  { name: "Alice", bootyCalls: 2 },
-  { name: "Hogsback", bootyCalls: 1 },
-  { name: "Willowmore", bootyCalls: 1 },
-  { name: "Jansenville", bootyCalls: 1 },
-  { name: "Aberdeen", bootyCalls: 1 },
-  { name: "Steytlerville", bootyCalls: 1 }
+  { name: "East London", bootyCalls: 0 }, // Will be updated with your info
+  { name: "Gqeberha (Port Elizabeth)", bootyCalls: 0 },
+  { name: "Mthatha", bootyCalls: 0 },
+  { name: "Qonce (King William's Town)", bootyCalls: 0 },
+  { name: "Bhisho", bootyCalls: 0 },
+  { name: "Graaff-Reinet", bootyCalls: 0 },
+  { name: "Jeffrey's Bay", bootyCalls: 0 },
+  { name: "Stutterheim", bootyCalls: 0 },
+  { name: "Somerset East", bootyCalls: 0 },
+  { name: "Cradock", bootyCalls: 0 },
+  { name: "Aliwal North", bootyCalls: 0 },
+  { name: "Maclear", bootyCalls: 0 },
+  { name: "Butterworth", bootyCalls: 0 },
+  { name: "Lady Frere", bootyCalls: 0 },
+  { name: "Port Alfred", bootyCalls: 0 },
+  { name: "Kenton-on-Sea", bootyCalls: 0 },
+  { name: "St Francis Bay", bootyCalls: 0 },
+  { name: "Patensie", bootyCalls: 0 },
+  { name: "Kirkwood", bootyCalls: 0 },
+  { name: "Uitenhage", bootyCalls: 0 },
+  { name: "Despatch", bootyCalls: 0 },
+  { name: "Adelaide", bootyCalls: 0 },
+  { name: "Bedford", bootyCalls: 0 },
+  { name: "Fort Beaufort", bootyCalls: 0 },
+  { name: "Alice", bootyCalls: 0 },
+  { name: "Hogsback", bootyCalls: 0 },
+  { name: "Willowmore", bootyCalls: 0 },
+  { name: "Jansenville", bootyCalls: 0 },
+  { name: "Aberdeen", bootyCalls: 0 },
+  { name: "Steytlerville", bootyCalls: 0 }
 ];
 
-// Booty Calls data
+// =============================================
+// ADD YOUR BOOTY CALLS INFORMATION HERE
+// =============================================
 const bootyCallsByCity = {
   "East London": [
+    // Example 1: Bunny
+    // You will replace this with real information
+    // When you're ready to add pictures, let me know and I'll show you how
+    
     {
       id: 1,
-      name: "Candice",
-      age: 24,
-      images: ["https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"],
+      name: "Bunny",
+      age: 25,
+      images: ["https://via.placeholder.com/600x400/ff3b30/ffffff?text=Bunny+Photo"], // Replace with real image URL
+      location: "Quigney, East London",
       price: 800,
       accommodation: true,
-      description: "Professional and discreet, available for night/day bookings",
-      features: ["Verified", "Accommodation Available", "24/7", "Top Rated"]
+      availability: "Monday-Saturday, 8PM-2AM",
+      bodyType: "Curvy",
+      description: "Sweet and fun-loving, available for night bookings",
+      features: ["Verified", "Accommodation Available", "Available Now", "New"]
     },
-    {
-      id: 2,
-      name: "Nomtha",
-      age: 28,
-      images: ["https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"],
-      price: 700,
-      accommodation: false,
-      description: "Sweet and caring, specializes in night sessions",
-      features: ["Verified", "Popular", "Flexible", "New"]
-    },
-    {
-      id: 3,
-      name: "Zinhle",
-      age: 22,
-      images: ["https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"],
-      price: 750,
-      accommodation: true,
-      description: "VIP experience with luxury accommodation",
-      features: ["Verified", "VIP", "Accommodation Available", "Luxury"]
-    }
+    
+    // Add more booty calls for East London here
+    // {
+    //   id: 2,
+    //   name: "Candy",
+    //   age: 23,
+    //   images: ["URL_TO_PICTURE"],
+    //   location: "Southernwood, East London",
+    //   price: 750,
+    //   accommodation: false,
+    //   availability: "Weekends Only",
+    //   bodyType: "Slim",
+    //   description: "Your description here",
+    //   features: ["Verified", "Popular", "Flexible"]
+    // }
   ],
+  
   "Gqeberha (Port Elizabeth)": [
-    {
-      id: 4,
-      name: "Sindi",
-      age: 26,
-      images: ["https://images.unsplash.com/photo-1494790108755-2616c113a1c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"],
-      price: 850,
-      accommodation: true,
-      description: "Premium service with beach view accommodation",
-      features: ["Verified", "VIP", "Accommodation Available", "Beach View"]
-    },
-    {
-      id: 5,
-      name: "Amahle",
-      age: 25,
-      images: ["https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"],
-      price: 600,
-      accommodation: false,
-      description: "Friendly and fun for day bookings",
-      features: ["Verified", "Day Specialist", "Friendly"]
-    }
+    // Add booty calls for Port Elizabeth here
   ],
+  
   "Mthatha": [
-    {
-      id: 6,
-      name: "Aphiwe",
-      age: 25,
-      images: ["https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"],
-      price: 600,
-      accommodation: false,
-      description: "Sweet and accommodating for day bookings",
-      features: ["Verified", "Day Specialist", "Friendly"]
-    }
-  ],
-  "Qonce (King William's Town)": [
-    {
-      id: 7,
-      name: "Buhle",
-      age: 23,
-      images: ["https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"],
-      price: 650,
-      accommodation: true,
-      description: "Available for both night and day bookings",
-      features: ["Verified", "Accommodation Available", "Flexible"]
-    }
-  ],
-  "Jeffrey's Bay": [
-    {
-      id: 8,
-      name: "Jade",
-      age: 22,
-      images: ["https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80"],
-      price: 900,
-      accommodation: true,
-      description: "Premium service with luxury accommodation",
-      features: ["Verified", "VIP", "Accommodation Available", "Luxury"]
-    }
+    // Add booty calls for Mthatha here
   ]
+  
+  // Add more cities as needed
 };
+
+// Function to update booty call counts
+function updateBootyCallCounts() {
+  easternCapeCities.forEach(city => {
+    const bootyCalls = bootyCallsByCity[city.name] || [];
+    city.bootyCalls = bootyCalls.length;
+  });
+}
 
 // Initialize cities grid
 function initializeCities() {
+  // First update counts based on your data
+  updateBootyCallCounts();
+  
   const cityGrid = document.getElementById('cityGrid');
   cityGrid.innerHTML = '';
   
@@ -1058,13 +1041,10 @@ function initializeCities() {
     cityCard.className = 'city-card';
     cityCard.dataset.city = city.name;
     
-    const bootyCalls = bootyCallsByCity[city.name] || [];
-    const bootyCount = bootyCalls.length;
-    
     cityCard.innerHTML = `
       <i class="fas fa-map-marker-alt"></i>
       <div class="city-name">${city.name}</div>
-      <div class="booty-count">${bootyCount} booty calls</div>
+      <div class="booty-count">${city.bootyCalls} booty calls</div>
     `;
     
     cityCard.addEventListener('click', () => selectCity(city.name));
@@ -1133,7 +1113,7 @@ function displayBootyCalls(cityName) {
   bootyCalls.forEach(bootyCall => {
     const bootyCard = document.createElement('div');
     bootyCard.className = 'booty-card';
-    if (bootyCall.features.includes('Popular')) {
+    if (bootyCall.features.includes('Available Now')) {
       bootyCard.classList.add('featured');
     }
     
@@ -1146,8 +1126,14 @@ function displayBootyCalls(cityName) {
       <img src="${bootyCall.images[0]}" alt="${bootyCall.name}" class="booty-img">
       <div class="booty-info">
         <h3 class="booty-name">${bootyCall.name}, ${bootyCall.age}</h3>
-        <p class="booty-location">${cityName}</p>
+        <div class="booty-details">
+          <span class="booty-location">${bootyCall.location}</span>
+          <span style="color: var(--accent-gold);">${bootyCall.bodyType}</span>
+        </div>
         <p style="font-size: 0.9rem; color: var(--text-muted); margin: 10px 0;">
+          <i class="far fa-clock"></i> ${bootyCall.availability}
+        </p>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin: 5px 0;">
           ${bootyCall.description}
         </p>
         <div class="booty-features">
@@ -1158,7 +1144,7 @@ function displayBootyCalls(cityName) {
           <p class="price-note">${bootyCall.accommodation ? '✓ Accommodation available' : '✓ Transport included'}</p>
         </div>
         <button class="btn" style="width: 100%; margin-top: 15px;" onclick="selectBootyCall(${bootyCall.id})">
-          Book This Booty Call
+          Book ${bootyCall.name}
         </button>
       </div>
     `;
@@ -1177,7 +1163,7 @@ function selectBootyCall(bootyCallId) {
     bookingData.selectedBooty = bootyCall;
     document.getElementById('bootyNameDisplay').textContent = bootyCall.name;
     document.getElementById('bookingAmount').textContent = bootyCall.price;
-    document.getElementById('finalBootyName').textContent = `${bootyCall.name}, ${bootyCall.age}`;
+    document.getElementById('finalBootyName').textContent = `${bootyCall.name}, ${bootyCall.age} - ${bootyCall.location}`;
     bookingData.price = bootyCall.price;
     
     goToStep(3);
@@ -1269,10 +1255,8 @@ document.getElementById('selfieInput').addEventListener('change', function(e) {
   }
 });
 
-// Pay now button
+// Form validation before payment
 document.getElementById('payNowBtn').addEventListener('click', function(e) {
-  e.preventDefault();
-  
   // Validate form
   const fullName = document.getElementById('full-name').value;
   const phone = document.getElementById('phone').value;
@@ -1283,21 +1267,27 @@ document.getElementById('payNowBtn').addEventListener('click', function(e) {
   
   if (!fullName || !phone || !location || !date || !startTime || !duration) {
     alert('Please fill in all required fields');
-    return;
+    e.preventDefault();
+    return false;
   }
   
   if (!bookingData.selfieUploaded) {
     alert('Please upload a selfie for verification');
-    return;
+    e.preventDefault();
+    return false;
   }
   
   if (!document.getElementById('terms').checked) {
     alert('You must agree to the terms and conditions');
-    return;
+    e.preventDefault();
+    return false;
   }
   
+  // Calculate end time
+  calculateEndTime();
+  
   // Update success screen with booking details
-  document.getElementById('finalBootyName').textContent = `${bookingData.selectedBooty?.name}, ${bookingData.selectedBooty?.age}`;
+  document.getElementById('finalBootyName').textContent = `${bookingData.selectedBooty?.name}, ${bookingData.selectedBooty?.age} - ${bookingData.selectedBooty?.location}`;
   document.getElementById('finalLocation').textContent = location;
   
   const dateObj = new Date(date);
@@ -1317,8 +1307,8 @@ document.getElementById('payNowBtn').addEventListener('click', function(e) {
   document.getElementById('finalDuration').textContent = `${duration} Hours`;
   document.getElementById('finalAmount').textContent = bookingData.price;
   
-  // Proceed to payment step
-  goToStep(4);
+  // Allow the link to proceed
+  return true;
 });
 
 // Navigation functions
@@ -1362,6 +1352,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 300);
   }, 2000);
 });
+
+// =============================================
+// HOW TO ADD YOUR BOOTY CALLS:
+// =============================================
+// 1. In the bootyCallsByCity object above, add your booty calls
+// 2. Format for each booty call:
+/*
+{
+  id: 1, // Unique number
+  name: "Bunny",
+  age: 25,
+  images: ["IMAGE_URL_HERE"], // You'll need to upload images online
+  location: "Quigney, East London",
+  price: 800,
+  accommodation: true, // or false
+  availability: "Monday-Saturday, 8PM-2AM",
+  bodyType: "Curvy", // or "Slim", "Athletic", "Voluptuous", etc.
+  description: "Your description here",
+  features: ["Verified", "Accommodation Available", "Available Now"]
+}
+*/
+
+// To add images:
+// 1. Upload pictures to an image hosting service (ImgBB, Imgur, etc.)
+// 2. Get the direct image URL
+// 3. Replace "https://via.placeholder.com/600x400/ff3b30/ffffff?text=Bunny+Photo"
+// 4. With your actual image URL
+
+// Need help? Just provide the information and I'll help you format it!
 </script>
 </body>
 </html>
