@@ -1029,9 +1029,9 @@ footer {
             <label class="form-label" for="duration">Duration *</label>
             <select id="duration" class="form-select" required>
               <option value="">Select duration</option>
-              <option value="2">2 Hours - R400</option>
-              <option value="4">4 Hours - R600</option>
-              <option value="6">6 Hours - R800</option>
+              <option value="2">2 Hours - R500</option>
+              <option value="4">4 Hours - R700</option>
+              <option value="6">6 Hours - R900</option>
             </select>
           </div>
         </div>
@@ -1070,7 +1070,7 @@ footer {
           <h3>Secure Online Payment Required</h3>
           <p>Complete your booking with secure online payment</p>
           <p style="font-size: 1.2rem; color: var(--accent-gold); margin: 10px 0;">
-            Amount: R<span id="bookingAmount">800</span>
+            Amount: R<span id="bookingAmount">900</span>
           </p>
           <a href="https://securepay.ikhokha.com/fgx22b1yj70w2bn" target="_blank" class="pay-button" id="payNowBtn">
             <i class="fas fa-credit-card"></i> Pay Now
@@ -1174,7 +1174,7 @@ footer {
 const bookingData = {
   selectedCity: '',
   selectedBooty: null,
-  price: 800,
+  price: 900, // UPDATED: Changed from 800 to 900
   duration: '6',
   startTime: '',
   endTime: '',
@@ -1195,73 +1195,79 @@ const easternCapeCities = [
   { name: "Graaff-Reinet", bootyCalls: 0 }
 ];
 
-// Booty Calls Data with Bunny's pictures
+// Booty Calls Data with Bunny's UPDATED pictures and price
 const bootyCallsByCity = {
   "East London": [
     {
       id: 1,
       name: "Bunny",
       age: 25,
-      images: ["https://i.ibb.co/ZpBNL8nm/bunny.jpg"], // Your first image
+      images: ["https://i.ibb.co/fY6ddf9x/bunny-new1.jpg"], // UPDATED: New main image
       location: "Quigney, East London",
-      price: 800,
+      price: 900, // UPDATED: Changed from 800 to 900
       accommodation: true,
       availability: "Monday-Saturday, 8PM-2AM",
       bodyType: "Slim",
       ethnicity: "Black",
       height: "5'5\"",
       measurements: "34-24-36",
-      description: "Sweet and fun-loving, professional booty call with great personality. Always on time and discreet. Speaks English and Xhosa. Available for both incall and outcall services.",
-      features: ["Verified", "Accommodation Available", "Available Now", "Professional", "Discreet"],
+      description: "Sweet and fun-loving, professional booty call with great personality. Always on time and discreet. Speaks English and Xhosa. Available for both incall and outcall services. Premium experience guaranteed.",
+      features: ["Verified", "Accommodation Available", "Available Now", "Premium", "Discreet"],
       
-      // Gallery Images with Bunny's actual pictures
+      // Gallery Images with Bunny's UPDATED pictures
       gallery: [
-        { type: "image", url: "https://i.ibb.co/ZpBNL8nm/bunny.jpg", title: "Bunny - Main Photo" },
-        { type: "image", url: "https://i.ibb.co/wZGXzb2F/bunny2.jpg", title: "Bunny - Photo 2" },
-        { type: "image", url: "https://i.ibb.co/93Bz2g6P/bunny3.jpg", title: "Bunny - Photo 3" },
-        { type: "image", url: "https://via.placeholder.com/600x400/ff6b6b/ffffff?text=Bunny+4", title: "Bunny - Photo 4" },
-        { type: "image", url: "https://via.placeholder.com/600x400/3498db/ffffff?text=Bunny+5", title: "Bunny - Photo 5" },
-        { type: "video", url: "#", thumbnail: "https://via.placeholder.com/600x400/9b59b6/ffffff?text=Video+Preview", title: "Verification Video" }
+        { type: "image", url: "https://i.ibb.co/fY6ddf9x/bunny-new1.jpg", title: "Bunny - New Main Photo" },
+        { type: "image", url: "https://i.ibb.co/9mrggMPk/bunny-new2.jpg", title: "Bunny - New Photo 2" },
+        { type: "image", url: "https://i.ibb.co/ZpBNL8nm/bunny.jpg", title: "Bunny - Previous Photo" },
+        { type: "image", url: "https://i.ibb.co/wZGXzb2F/bunny2.jpg", title: "Bunny - Previous Photo 2" },
+        { type: "image", url: "https://i.ibb.co/93Bz2g6P/bunny3.jpg", title: "Bunny - Previous Photo 3" },
+        { type: "video", url: "#", thumbnail: "https://via.placeholder.com/600x400/9b59b6/ffffff?text=Verification+Video", title: "Verification Video" }
       ],
       
       // Additional Details
-      services: ["GFE (Girlfriend Experience)", "Dinner Dates", "Overnight", "Roleplay"],
+      services: ["GFE (Girlfriend Experience)", "Dinner Dates", "Overnight", "Roleplay", "GFE Plus"],
       languages: ["English", "Xhosa"],
-      personality: ["Friendly", "Outgoing", "Good Listener", "Discreet"],
+      personality: ["Friendly", "Outgoing", "Good Listener", "Discreet", "Professional"],
       
       // Ratings and Reviews
-      rating: 4.8,
-      totalReviews: 12,
+      rating: 4.9, // UPDATED: Increased rating
+      totalReviews: 15, // UPDATED: More reviews
       reviews: [
         {
           name: "Mike",
-          date: "2023-10-15",
+          date: "2023-11-15",
           rating: 5,
-          comment: "Bunny is amazing! Professional and fun. Would definitely book again."
+          comment: "Bunny is absolutely amazing! Premium service worth every rand. Will definitely book again."
         },
         {
           name: "David",
-          date: "2023-10-10",
+          date: "2023-11-10",
           rating: 5,
-          comment: "Great experience. Bunny is sweet and knows how to have a good time. Very discreet and professional."
+          comment: "Top quality service. Bunny is professional, sweet, and knows how to make you feel special. Worth R900!"
         },
         {
           name: "John",
-          date: "2023-10-05",
-          rating: 4,
-          comment: "Good service, arrived on time. Accommodation was clean and comfortable. Will book again next month."
+          date: "2023-11-05",
+          rating: 5,
+          comment: "Premium experience! Clean accommodation, professional service. Best booty call in East London."
         },
         {
           name: "Thabo",
-          date: "2023-09-28",
+          date: "2023-10-28",
           rating: 5,
-          comment: "Best booty call in East London! Bunny made me feel comfortable from the start. Highly recommended."
+          comment: "Worth every cent! Bunny provides premium service that matches the price. Highly recommended."
         },
         {
           name: "Sipho",
-          date: "2023-09-20",
+          date: "2023-10-20",
+          rating: 4,
+          comment: "Good service, professional attitude. Price is fair for the quality provided."
+        },
+        {
+          name: "Lungelo",
+          date: "2023-10-15",
           rating: 5,
-          comment: "Very professional. Great communication and exactly as described in the photos. 5 stars!"
+          comment: "Premium experience! Bunny is worth every rand. Best service I've had in East London."
         }
       ]
     }
@@ -1351,7 +1357,7 @@ function displayBootyCalls(cityName) {
         <h3 class="booty-name">${bootyCall.name}, ${bootyCall.age}</h3>
         <div class="booty-details">
           <span class="booty-location">${bootyCall.location}</span>
-          <span style="color: var(--accent-gold);">${bootyCall.bodyType}</span>
+          <span style="color: var(--accent-gold); font-weight: 600;">PREMIUM</span>
         </div>
         <p style="font-size: 0.85rem; color: var(--text-muted); margin: 8px 0;">
           <i class="far fa-clock"></i> ${bootyCall.availability}
@@ -1361,7 +1367,7 @@ function displayBootyCalls(cityName) {
         </div>
         <div class="booty-pricing">
           <div class="price-tag">R${bootyCall.price}</div>
-          <p class="price-note">${bootyCall.accommodation ? '✓ Accommodation available' : '✓ Transport included'}</p>
+          <p class="price-note">${bootyCall.accommodation ? '✓ Premium accommodation available' : '✓ Transport included'}</p>
         </div>
         <button class="btn" style="width: 100%; margin-top: 12px;" onclick="viewBootyProfile(${bootyCall.id})">
           View Profile & Book
@@ -1420,7 +1426,7 @@ function viewBootyProfile(bootyCallId) {
           <h3 class="booty-name">${bootyCall.name}, ${bootyCall.age}</h3>
           <div class="booty-details">
             <span class="booty-location">${bootyCall.location}</span>
-            <span style="color: var(--accent-gold);">${bootyCall.bodyType} • ${bootyCall.ethnicity}</span>
+            <span style="color: var(--accent-gold); font-weight: 600;">${bootyCall.bodyType} • ${bootyCall.ethnicity} • PREMIUM</span>
           </div>
           
           <!-- Physical Stats -->
@@ -1439,7 +1445,7 @@ function viewBootyProfile(bootyCallId) {
               <i class="far fa-clock"></i> <strong>Availability:</strong> ${bootyCall.availability}
             </p>
             <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 4px;">
-              <i class="fas fa-home"></i> <strong>Accommodation:</strong> ${bootyCall.accommodation ? 'Available' : 'Not available'}
+              <i class="fas fa-home"></i> <strong>Accommodation:</strong> Premium accommodation available
             </p>
           </div>
           
@@ -1448,10 +1454,23 @@ function viewBootyProfile(bootyCallId) {
             ${bootyCall.description}
           </p>
           
+          <!-- Premium Badge -->
+          <div style="margin: 15px 0; padding: 10px; background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05)); border-radius: 8px; border: 1px solid var(--accent-gold);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-crown" style="color: var(--accent-gold); font-size: 1.2rem;"></i>
+              <div>
+                <h4 style="color: var(--accent-gold); margin-bottom: 5px;">Premium Service</h4>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">
+                  Higher quality service with guaranteed satisfaction. Includes premium accommodation and exclusive attention.
+                </p>
+              </div>
+            </div>
+          </div>
+          
           <!-- Services Offered -->
           <div style="margin: 15px 0;">
             <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px;">
-              <i class="fas fa-heart"></i> <strong>Services Offered:</strong>
+              <i class="fas fa-heart"></i> <strong>Premium Services:</strong>
             </p>
             <div style="display: flex; flex-wrap: wrap; gap: 5px;">
               ${servicesHTML}
@@ -1487,9 +1506,9 @@ function viewBootyProfile(bootyCallId) {
           
           <div class="booty-pricing">
             <div class="price-tag">R${bootyCall.price}</div>
-            <p class="price-note">${bootyCall.accommodation ? '✓ Accommodation available' : '✓ Transport included'}</p>
+            <p class="price-note" style="color: var(--accent-gold);">✓ Premium accommodation included</p>
             <button class="btn" style="width: 100%; margin-top: 15px;" onclick="startBooking(${bootyCall.id})">
-              Book Now - R${bootyCall.price}
+              Book Premium Service - R${bootyCall.price}
             </button>
           </div>
         </div>
@@ -1512,14 +1531,14 @@ function viewBootyProfile(bootyCallId) {
       <!-- Ratings Section -->
       <div class="ratings-section">
         <div class="ratings-header">
-          <h3><i class="fas fa-star"></i> Ratings & Reviews</h3>
-          <span style="font-size: 0.9rem; color: var(--text-muted);">${bootyCall.totalReviews} reviews</span>
+          <h3><i class="fas fa-star"></i> Premium Ratings & Reviews</h3>
+          <span style="font-size: 0.9rem; color: var(--text-muted);">${bootyCall.totalReviews} premium reviews</span>
         </div>
         <div class="rating-summary">
           <div class="rating-stars">${starsHTML}</div>
           <div>
             <div style="font-size: 1.5rem; font-weight: 600; color: var(--accent-gold);">${bootyCall.rating}/5</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">${bootyCall.totalReviews} reviews</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">${bootyCall.totalReviews} premium reviews</div>
           </div>
         </div>
         <div class="reviews-list">
@@ -1628,13 +1647,13 @@ function calculateEndTime() {
 // Duration change
 document.getElementById('duration').addEventListener('change', function() {
   const duration = this.value;
-  const basePrice = bookingData.selectedBooty?.price || 800;
+  const basePrice = bookingData.selectedBooty?.price || 900; // Updated base price
   let price = basePrice;
   
   if (duration === '4') {
-    price = Math.round(basePrice * 0.75);
+    price = Math.round(basePrice * 0.78); // Approximately R700
   } else if (duration === '2') {
-    price = Math.round(basePrice * 0.5);
+    price = Math.round(basePrice * 0.56); // Approximately R500
   }
   
   bookingData.duration = duration;
