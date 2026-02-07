@@ -261,6 +261,39 @@ body {
   border-bottom: 2px solid var(--primary-blue);
 }
 
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.stat-card {
+  background: var(--light-gray);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-blue);
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
 /* Video Management */
 .video-form .form-row {
   display: grid;
@@ -903,6 +936,10 @@ footer {
   .upload-area {
     padding: 30px 15px;
   }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* Tablet Styles */
@@ -1017,7 +1054,7 @@ footer {
         </div>
         
         <div class="stat-card">
-          <div class="stat-number" id="totalCategories">4</div>
+          <div class="stat-number" id="totalCategories">0</div>
           <div class="stat-label">Categories</div>
         </div>
         
@@ -1061,6 +1098,7 @@ footer {
               <option value="Documentary">Documentary</option>
               <option value="Sports">Sports</option>
               <option value="Gaming">Gaming</option>
+              <option value="Technology">Technology</option>
             </select>
           </div>
         </div>
@@ -1075,7 +1113,7 @@ footer {
           <div class="upload-area" id="videoUploadArea">
             <i class="fas fa-cloud-upload-alt"></i>
             <h3>Click to Upload MP4 Video</h3>
-            <p style="color: var(--text-muted);">Maximum file size: 100MB</p>
+            <p style="color: var(--text-muted);">Maximum file size: 500MB</p>
             <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 10px;">
               Supports: MP4, WebM, OGG
             </p>
@@ -1246,7 +1284,7 @@ const ADMIN_CODE = "548755";
 // Video data storage - EMPTY INITIALLY
 let videoData = {
   videos: [],
-  categories: ["All", "Entertainment", "Music", "Education", "Documentary", "Sports", "Gaming"]
+  categories: ["All", "Entertainment", "Music", "Education", "Documentary", "Sports", "Gaming", "Technology"]
 };
 
 // Show login page
@@ -1408,7 +1446,6 @@ function setupFileUploads() {
   const videoFileInput = document.getElementById('videoFileInput');
   const thumbnailUploadArea = document.getElementById('thumbnailUploadArea');
   const thumbnailFileInput = document.getElementById('thumbnailFileInput');
-  const thumbnailPreview = document.getElementById('thumbnailPreview');
   
   // Video file upload
   videoUploadArea.addEventListener('click', () => videoFileInput.click());
@@ -1433,9 +1470,9 @@ function handleVideoFileSelect(e) {
     return;
   }
   
-  // Check file size (100MB limit)
-  if (file.size > 100 * 1024 * 1024) {
-    alert('File size must be less than 100MB');
+  // Check file size (500MB limit - increased from 100MB)
+  if (file.size > 500 * 1024 * 1024) {
+    alert('File size must be less than 500MB');
     return;
   }
   
@@ -1476,7 +1513,7 @@ function handleThumbnailFileSelect(e) {
   const reader = new FileReader();
   reader.onload = function(e) {
     thumbnailPreviewUrl = e.target.result;
-    thumbnailPreview.innerHTML = `
+    document.getElementById('thumbnailPreview').innerHTML = `
       <img src="${thumbnailPreviewUrl}" style="max-width: 200px; border-radius: 8px; margin-top: 10px;">
     `;
   };
@@ -1484,41 +1521,52 @@ function handleThumbnailFileSelect(e) {
 }
 
 function generateThumbnailFromVideo(videoFile) {
-  // Create a video element to capture thumbnail
-  const video = document.createElement('video');
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
-  
-  video.addEventListener('loadeddata', function() {
-    // Set canvas size
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+  return new Promise((resolve) => {
+    // Create a video element to capture thumbnail
+    const video = document.createElement('video');
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
     
-    // Capture frame at 1 second
-    video.currentTime = 1;
+    video.addEventListener('loadeddata', function() {
+      // Set canvas size
+      canvas.width = video.videoWidth || 640;
+      canvas.height = video.videoHeight || 360;
+      
+      // Capture frame at 1 second
+      video.currentTime = 1;
+    });
+    
+    video.addEventListener('seeked', function() {
+      // Draw video frame to canvas
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      
+      // Convert canvas to data URL
+      thumbnailPreviewUrl = canvas.toDataURL('image/jpeg', 0.8);
+      
+      // Update thumbnail preview
+      document.getElementById('thumbnailPreview').innerHTML = `
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Auto-generated thumbnail:</p>
+        <img src="${thumbnailPreviewUrl}" style="max-width: 200px; border-radius: 8px; margin-top: 10px;">
+      `;
+      
+      resolve(thumbnailPreviewUrl);
+    });
+    
+    video.addEventListener('error', function() {
+      // If thumbnail generation fails, use default thumbnail
+      thumbnailPreviewUrl = getDefaultThumbnail('Entertainment');
+      resolve(thumbnailPreviewUrl);
+    });
+    
+    // Create object URL for the video file
+    const videoUrl = URL.createObjectURL(videoFile);
+    video.src = videoUrl;
+    video.load();
   });
-  
-  video.addEventListener('seeked', function() {
-    // Draw video frame to canvas
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    
-    // Convert canvas to data URL
-    thumbnailPreviewUrl = canvas.toDataURL('image/jpeg', 0.8);
-    
-    // Update thumbnail preview
-    thumbnailPreview.innerHTML = `
-      <p style="color: var(--text-muted); font-size: 0.9rem;">Auto-generated thumbnail:</p>
-      <img src="${thumbnailPreviewUrl}" style="max-width: 200px; border-radius: 8px; margin-top: 10px;">
-    `;
-  });
-  
-  // Create object URL for the video file
-  const videoUrl = URL.createObjectURL(videoFile);
-  video.src = videoUrl;
 }
 
 // Handle video upload form submission
-document.getElementById('videoUploadForm').addEventListener('submit', async function(e) {
+document.getElementById('videoUploadForm').addEventListener('submit', function(e) {
   e.preventDefault();
   
   if (!selectedVideoFile) {
@@ -1545,51 +1593,73 @@ document.getElementById('videoUploadForm').addEventListener('submit', async func
   uploadSubmitBtn.disabled = true;
   uploadSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
   
+  // Start upload process
+  uploadVideo(title, category, description);
+});
+
+async function uploadVideo(title, category, description) {
+  const uploadProgress = document.getElementById('uploadProgress');
+  const progressFill = document.getElementById('progressFill');
+  const progressText = document.getElementById('progressText');
+  
   try {
-    // Simulate upload progress
-    for (let i = 0; i <= 100; i += 10) {
-      await new Promise(resolve => setTimeout(resolve, 200));
-      progressFill.style.width = `${i}%`;
-      progressText.textContent = `Uploading... ${i}%`;
-    }
+    // Update progress to 25%
+    progressFill.style.width = '25%';
+    progressText.textContent = 'Reading video file...';
     
     // Read video file as data URL
-    const videoReader = new FileReader();
+    const videoDataUrl = await readFileAsDataURL(selectedVideoFile);
     
-    videoReader.onload = async function(e) {
-      const videoDataUrl = e.target.result;
-      
-      // Get duration of video
-      const duration = await getVideoDuration(selectedVideoFile);
-      const durationFormatted = formatDuration(duration);
-      
-      // Create new video object
-      const newVideo = {
-        id: Date.now().toString(),
-        title: title,
-        description: description || "No description provided",
-        category: category,
-        videoData: videoDataUrl,
-        thumbnail: thumbnailPreviewUrl || getDefaultThumbnail(category),
-        duration: durationFormatted,
-        views: 0,
-        uploadDate: new Date().toISOString().split('T')[0],
-        fileSize: (selectedVideoFile.size / (1024 * 1024)).toFixed(2) + "MB",
-        fileName: selectedVideoFile.name
-      };
-      
-      // Add to videos array
-      videoData.videos.unshift(newVideo);
-      
-      // Add category if new
-      if (!videoData.categories.includes(category)) {
-        videoData.categories.push(category);
-      }
-      
-      // Save to localStorage
-      localStorage.setItem('waterflow_videoData', JSON.stringify(videoData));
-      
-      // Hide progress
+    // Update progress to 50%
+    progressFill.style.width = '50%';
+    progressText.textContent = 'Processing video...';
+    
+    // Get video duration
+    const duration = await getVideoDuration(selectedVideoFile);
+    const durationFormatted = formatDuration(duration);
+    
+    // Update progress to 75%
+    progressFill.style.width = '75%';
+    progressText.textContent = 'Creating thumbnail...';
+    
+    // Get or create thumbnail
+    let thumbnailUrl = thumbnailPreviewUrl;
+    if (!thumbnailUrl) {
+      thumbnailUrl = await generateThumbnailFromVideo(selectedVideoFile);
+    }
+    
+    // Update progress to 100%
+    progressFill.style.width = '100%';
+    progressText.textContent = 'Finalizing upload...';
+    
+    // Create new video object
+    const newVideo = {
+      id: Date.now().toString(),
+      title: title,
+      description: description || "No description provided",
+      category: category,
+      videoData: videoDataUrl,
+      thumbnail: thumbnailUrl || getDefaultThumbnail(category),
+      duration: durationFormatted,
+      views: 0,
+      uploadDate: new Date().toISOString().split('T')[0],
+      fileSize: (selectedVideoFile.size / (1024 * 1024)).toFixed(2) + "MB",
+      fileName: selectedVideoFile.name
+    };
+    
+    // Add to videos array
+    videoData.videos.unshift(newVideo);
+    
+    // Add category if new
+    if (!videoData.categories.includes(category)) {
+      videoData.categories.push(category);
+    }
+    
+    // Save to localStorage
+    localStorage.setItem('waterflow_videoData', JSON.stringify(videoData));
+    
+    // Hide progress
+    setTimeout(() => {
       uploadProgress.style.display = 'none';
       
       // Reset form
@@ -1600,21 +1670,33 @@ document.getElementById('videoUploadForm').addEventListener('submit', async func
       
       // Reload data
       loadAdminData();
-    };
-    
-    videoReader.readAsDataURL(selectedVideoFile);
+      loadPublicVideos();
+    }, 500);
     
   } catch (error) {
     console.error('Upload error:', error);
     alert('Error uploading video. Please try again.');
     uploadProgress.style.display = 'none';
-    uploadSubmitBtn.disabled = false;
-    uploadSubmitBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Video';
+    document.getElementById('uploadSubmitBtn').disabled = false;
+    document.getElementById('uploadSubmitBtn').innerHTML = '<i class="fas fa-upload"></i> Upload Video';
   }
-});
+}
+
+function readFileAsDataURL(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      resolve(e.target.result);
+    };
+    reader.onerror = function(e) {
+      reject(new Error('Failed to read file'));
+    };
+    reader.readAsDataURL(file);
+  });
+}
 
 function getVideoDuration(file) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const video = document.createElement('video');
     video.preload = 'metadata';
     
@@ -1623,11 +1705,16 @@ function getVideoDuration(file) {
       resolve(video.duration);
     };
     
+    video.onerror = function() {
+      reject(new Error('Failed to get video duration'));
+    };
+    
     video.src = URL.createObjectURL(file);
   });
 }
 
 function formatDuration(seconds) {
+  if (!seconds || seconds === 0) return "0:00";
   const mins = Math.floor(seconds / 60);
   const secs = Math.floor(seconds % 60);
   return `${mins}:${secs.toString().padStart(2, '0')}`;
@@ -1642,7 +1729,7 @@ function resetUploadForm() {
   // Reset upload area text
   const videoUploadArea = document.getElementById('videoUploadArea');
   videoUploadArea.querySelector('h3').textContent = 'Click to Upload MP4 Video';
-  videoUploadArea.querySelector('p').textContent = 'Maximum file size: 100MB';
+  videoUploadArea.querySelector('p').textContent = 'Maximum file size: 500MB';
   videoUploadArea.querySelector('i').className = 'fas fa-cloud-upload-alt';
   videoUploadArea.querySelector('i').style.color = '';
   
@@ -1664,7 +1751,8 @@ function getDefaultThumbnail(category) {
     "Education": "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
     "Documentary": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
     "Sports": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    "Gaming": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+    "Gaming": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "Technology": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
   };
   
   return thumbnails[category] || "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80";
