@@ -1377,22 +1377,162 @@ footer {
 
 <script>
 // =============================================
-// SIMPLIFIED WORKING VERSION
+// COMPLETE WORKING VERSION WITH PERSISTENT STORAGE
 // =============================================
 
 // Admin login code
 const ADMIN_CODE = "548755";
 
-// Simple video data storage
+// Video data storage
 let videoData = {
   videos: [],
   categories: ["All", "Entertainment", "Music", "Education", "Documentary", "Sports", "Gaming", "Technology"]
 };
 
-// File storage using simple object
-const fileStorage = {
-  videos: {},
-  thumbnails: {}
+// Browser-based video storage (using IndexedDB)
+const videoDB = {
+  name: "WaterFlowVideos",
+  version: 1,
+  db: null,
+
+  // Initialize database
+  init: function() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(this.name, this.version);
+      
+      request.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains('videos')) {
+          const videoStore = db.createObjectStore('videos', { keyPath: 'id' });
+          videoStore.createIndex('category', 'category', { unique: false });
+        }
+        if (!db.objectStoreNames.contains('files')) {
+          db.createObjectStore('files', { keyPath: 'id' });
+        }
+      };
+      
+      request.onsuccess = (e) => {
+        this.db = e.target.result;
+        resolve();
+      };
+      
+      request.onerror = (e) => {
+        console.error('IndexedDB error:', e.target.error);
+        reject("Failed to open database");
+      };
+    });
+  },
+
+  // Save video metadata
+  saveVideo: function(video) {
+    return new Promise((resolve, reject) => {
+      if (!this.db) {
+        reject("Database not initialized");
+        return;
+      }
+      
+      const transaction = this.db.transaction(['videos'], 'readwrite');
+      const store = transaction.objectStore('videos');
+      const request = store.put(video);
+      
+      request.onsuccess = () => resolve();
+      request.onerror = (e) => {
+        console.error('Save video error:', e.target.error);
+        reject("Failed to save video");
+      };
+    });
+  },
+
+  // Save video file
+  saveVideoFile: function(id, file) {
+    return new Promise((resolve, reject) => {
+      if (!this.db) {
+        reject("Database not initialized");
+        return;
+      }
+      
+      const transaction = this.db.transaction(['files'], 'readwrite');
+      const store = transaction.objectStore('files');
+      const request = store.put({ id: id, file: file });
+      
+      request.onsuccess = () => resolve();
+      request.onerror = (e) => {
+        console.error('Save file error:', e.target.error);
+        reject("Failed to save video file");
+      };
+    });
+  },
+
+  // Get all videos
+  getAllVideos: function() {
+    return new Promise((resolve, reject) => {
+      if (!this.db) {
+        resolve([]);
+        return;
+      }
+      
+      const transaction = this.db.transaction(['videos'], 'readonly');
+      const store = transaction.objectStore('videos');
+      const request = store.getAll();
+      
+      request.onsuccess = (e) => resolve(e.target.result || []);
+      request.onerror = (e) => {
+        console.error('Get videos error:', e.target.error);
+        reject("Failed to get videos");
+      };
+    });
+  },
+
+  // Get video file
+  getVideoFile: function(id) {
+    return new Promise((resolve, reject) => {
+      if (!this.db) {
+        reject("Database not initialized");
+        return;
+      }
+      
+      const transaction = this.db.transaction(['files'], 'readonly');
+      const store = transaction.objectStore('files');
+      const request = store.get(id);
+      
+      request.onsuccess = (e) => {
+        if (e.target.result) {
+          resolve(e.target.result.file);
+        } else {
+          reject("File not found");
+        }
+      };
+      request.onerror = (e) => {
+        console.error('Get file error:', e.target.error);
+        reject("Failed to get file");
+      };
+    });
+  },
+
+  // Delete video
+  deleteVideo: function(id) {
+    return new Promise((resolve, reject) => {
+      if (!this.db) {
+        reject("Database not initialized");
+        return;
+      }
+      
+      const transaction = this.db.transaction(['videos', 'files'], 'readwrite');
+      transaction.objectStore('videos').delete(id);
+      transaction.objectStore('files').delete(id);
+      
+      transaction.oncomplete = () => resolve();
+      transaction.onerror = (e) => {
+        console.error('Delete error:', e.target.error);
+        reject("Failed to delete video");
+      };
+    });
+  },
+
+  // Update video views
+  updateVideoViews: function(video) {
+    return this.saveVideo(video);
+  }
 };
 
 // Show login page
@@ -1434,14 +1574,14 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
 });
 
 // Load admin data
-function loadAdminData() {
-  loadVideosList();
+async function loadAdminData() {
+  await loadVideosList();
   loadCategoriesList();
   loadStats();
 }
 
 // Load videos list
-function loadVideosList() {
+async function loadVideosList() {
   const videosList = document.getElementById('videosList');
   const noVideosMessage = document.getElementById('noVideosMessage');
   
@@ -1459,7 +1599,7 @@ function loadVideosList() {
     videoItem.className = 'video-item';
     
     videoItem.innerHTML = `
-      <img src="${video.thumbnail}" class="video-preview-thumbnail" alt="${video.title}">
+      <img src="${video.thumbnail}" class="video-preview-thumbnail" alt="${video.title}" onerror="this.src='${getDefaultThumbnail(video.category)}'">
       <div class="video-info">
         <div class="video-title">${video.title}</div>
         <div class="video-category">${video.category}</div>
@@ -1609,12 +1749,16 @@ document.getElementById('videoUploadForm').addEventListener('submit', async func
   uploadSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
   
   try {
-    // Step 1: Create video URL
-    updateProgress(10, 'Processing video...');
-    const videoUrl = URL.createObjectURL(selectedVideoFile);
+    // Step 1: Initialize database
+    updateProgress(10, 'Initializing...');
+    await videoDB.init();
     
-    // Step 2: Get duration
-    updateProgress(30, 'Getting duration...');
+    // Step 2: Create video ID
+    updateProgress(20, 'Creating video entry...');
+    const videoId = Date.now().toString();
+    
+    // Step 3: Get duration
+    updateProgress(30, 'Processing video...');
     let duration = "0:00";
     try {
       const videoDuration = await getVideoDuration(selectedVideoFile);
@@ -1623,41 +1767,40 @@ document.getElementById('videoUploadForm').addEventListener('submit', async func
       console.log('Using default duration');
     }
     
-    // Step 3: Create thumbnail
+    // Step 4: Create thumbnail
     updateProgress(50, 'Creating thumbnail...');
     let thumbnail = thumbnailPreviewUrl || getDefaultThumbnail(category);
     
-    // Step 4: Create video object
-    updateProgress(70, 'Creating video entry...');
+    // Step 5: Create video object
+    updateProgress(70, 'Saving data...');
     const newVideo = {
-      id: Date.now().toString(),
+      id: videoId,
       title: title,
       description: description || "No description provided",
       category: category,
-      videoUrl: videoUrl,
       thumbnail: thumbnail,
       duration: duration,
       views: 0,
       uploadDate: new Date().toISOString().split('T')[0],
       fileSize: (selectedVideoFile.size / (1024 * 1024)).toFixed(2) + "MB",
-      fileName: selectedVideoFile.name
+      fileName: selectedVideoFile.name,
+      fileType: selectedVideoFile.type
     };
     
-    // Store in file storage
-    fileStorage.videos[newVideo.id] = {
-      file: selectedVideoFile,
-      url: videoUrl
-    };
+    // Step 6: Save to database
+    updateProgress(80, 'Saving video file...');
+    await videoDB.saveVideo(newVideo);
+    await videoDB.saveVideoFile(videoId, selectedVideoFile);
     
-    // Step 5: Save
-    updateProgress(90, 'Saving...');
+    // Step 7: Add to current session
+    newVideo.videoUrl = URL.createObjectURL(selectedVideoFile);
     videoData.videos.unshift(newVideo);
     
     if (!videoData.categories.includes(category)) {
       videoData.categories.push(category);
     }
     
-    // Step 6: Complete
+    // Step 8: Complete
     updateProgress(100, 'Upload complete!');
     
     setTimeout(() => {
@@ -1708,6 +1851,20 @@ function formatDuration(seconds) {
   return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
+function getDefaultThumbnail(category) {
+  const thumbnails = {
+    "Entertainment": "https://images.unsplash.com/photo-1514327609218-4c8c4c6b21c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "Music": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "Education": "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "Documentary": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "Sports": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "Gaming": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "Technology": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+  };
+  
+  return thumbnails[category] || "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80";
+}
+
 function resetUploadForm() {
   document.getElementById('videoUploadForm').reset();
   selectedVideoFile = null;
@@ -1734,37 +1891,34 @@ function resetUploadState() {
   document.getElementById('uploadSubmitBtn').innerHTML = '<i class="fas fa-upload"></i> Upload Video';
 }
 
-function getDefaultThumbnail(category) {
-  const thumbnails = {
-    "Entertainment": "https://images.unsplash.com/photo-1514327609218-4c8c4c6b21c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    "Music": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    "Education": "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    "Documentary": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    "Sports": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    "Gaming": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-    "Technology": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-  };
-  
-  return thumbnails[category] || "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80";
-}
-
-function deleteVideo(index) {
+// Delete video
+async function deleteVideo(index) {
   if (confirm('Are you sure you want to delete this video?')) {
     const video = videoData.videos[index];
     
-    // Revoke URL to free memory
-    if (fileStorage.videos[video.id]) {
-      URL.revokeObjectURL(fileStorage.videos[video.id].url);
-      delete fileStorage.videos[video.id];
+    try {
+      // Delete from IndexedDB
+      await videoDB.deleteVideo(video.id);
+      
+      // Revoke URL to free memory
+      if (video.videoUrl && video.videoUrl.startsWith('blob:')) {
+        URL.revokeObjectURL(video.videoUrl);
+      }
+      
+      // Remove from current array
+      videoData.videos.splice(index, 1);
+      
+      showSaveStatus('Video deleted!');
+      loadAdminData();
+      loadPublicVideos();
+    } catch (error) {
+      console.error('Delete error:', error);
+      alert('Error deleting video');
     }
-    
-    videoData.videos.splice(index, 1);
-    showSaveStatus('Video deleted!');
-    loadAdminData();
-    loadPublicVideos();
   }
 }
 
+// Add category
 function addCategory() {
   const newCategoryInput = document.getElementById('newCategory');
   const newCategory = newCategoryInput.value.trim();
@@ -1889,40 +2043,68 @@ function filterVideosByCategory(category) {
   loadVideoGrid(category);
 }
 
-function playVideo(video) {
+async function playVideo(video) {
   const videoPlayer = document.getElementById('videoPlayer');
   const videoPlayerDetails = document.getElementById('videoPlayerDetails');
   
-  if (video.videoUrl) {
-    videoPlayer.src = video.videoUrl;
-  } else {
-    alert('Video file not available');
-    return;
+  try {
+    // If video URL doesn't exist, get it from storage
+    if (!video.videoUrl) {
+      try {
+        await videoDB.init();
+        const videoFile = await videoDB.getVideoFile(video.id);
+        video.videoUrl = URL.createObjectURL(videoFile);
+      } catch (error) {
+        console.error('Error loading video file:', error);
+        alert('Video file not available');
+        return;
+      }
+    }
+    
+    if (video.videoUrl) {
+      videoPlayer.src = video.videoUrl;
+    } else {
+      alert('Video file not available');
+      return;
+    }
+    
+    videoPlayerDetails.innerHTML = `
+      <h2 class="video-player-title">${video.title}</h2>
+      <div class="video-player-meta">
+        <span>${video.views} views</span>
+        <span>${new Date(video.uploadDate).toLocaleDateString()}</span>
+        <span>${video.duration}</span>
+        <span>${video.fileSize}</span>
+      </div>
+      <p class="video-player-description">${video.description}</p>
+    `;
+    
+    document.getElementById('videoModal').style.display = 'flex';
+    
+    // Update view count
+    video.views++;
+    
+    // Update video in database
+    try {
+      await videoDB.updateVideoViews(video);
+    } catch (error) {
+      console.error('Error updating views:', error);
+    }
+    
+    updateVideoViewsOnCard(video.id, video.views);
+    
+  } catch (error) {
+    console.error('Error playing video:', error);
+    alert('Could not load video');
   }
-  
-  videoPlayerDetails.innerHTML = `
-    <h2 class="video-player-title">${video.title}</h2>
-    <div class="video-player-meta">
-      <span>${video.views} views</span>
-      <span>${new Date(video.uploadDate).toLocaleDateString()}</span>
-      <span>${video.duration}</span>
-      <span>${video.fileSize}</span>
-    </div>
-    <p class="video-player-description">${video.description}</p>
-  `;
-  
-  document.getElementById('videoModal').style.display = 'flex';
-  
-  video.views++;
-  
-  updateVideoViewsOnCard(video.id, video.views);
 }
 
 function updateVideoViewsOnCard(videoId, newViews) {
   const videoCards = document.querySelectorAll('.video-card');
   videoCards.forEach(card => {
     const title = card.querySelector('.video-title-card').textContent;
-    if (title.includes(videoData.videos.find(v => v.id === videoId)?.title || '')) {
+    const video = videoData.videos.find(v => v.id === videoId);
+    if (video && title.includes(video.title)) {
       const viewsSpan = card.querySelector('.video-meta span:first-child');
       if (viewsSpan) {
         viewsSpan.textContent = `${newViews} views`;
@@ -1959,6 +2141,30 @@ function initializeSearch() {
   }
 }
 
+// Load videos from storage on startup
+async function loadVideosFromStorage() {
+  try {
+    await videoDB.init();
+    const savedVideos = await videoDB.getAllVideos();
+    
+    if (savedVideos && savedVideos.length > 0) {
+      // Load videos in reverse order (newest first)
+      savedVideos.reverse().forEach(video => {
+        videoData.videos.push(video);
+      });
+      
+      // Update categories from loaded videos
+      savedVideos.forEach(video => {
+        if (!videoData.categories.includes(video.category)) {
+          videoData.categories.push(video.category);
+        }
+      });
+    }
+  } catch (error) {
+    console.log('No saved videos found or error loading:', error);
+  }
+}
+
 // Navigation
 function switchSection(sectionId) {
   document.querySelectorAll('.admin-nav li').forEach(item => {
@@ -1977,23 +2183,31 @@ function switchSection(sectionId) {
 }
 
 // Initialize
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
   setupFileUploads();
-  showPublicSite();
   initializeSearch();
   
+  // Load videos from storage
+  await loadVideosFromStorage();
+  
+  // Show public site with loaded videos
+  showPublicSite();
+  
+  // Navigation event listeners
   document.querySelectorAll('.admin-nav li').forEach(item => {
     item.addEventListener('click', () => {
       switchSection(item.dataset.section);
     });
   });
   
+  // Close modal on escape key
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
       closeVideoModal();
     }
   });
   
+  // Close modal when clicking outside
   document.getElementById('videoModal').addEventListener('click', function(e) {
     if (e.target === this) {
       closeVideoModal();
