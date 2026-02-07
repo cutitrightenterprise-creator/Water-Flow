@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>StreamFlow - Video Streaming Platform</title>
+<title>WaterFlow - Video Streaming Platform</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * {
@@ -17,7 +17,7 @@
 :root {
   --primary-blue: #3498db;
   --dark-blue: #2980b9;
-  --accent-purple: #9b59b6;
+  --accent-blue: #1abc9c;
   --admin-purple: #9b59b6;
   --black: #121212;
   --dark-gray: #1e1e1e;
@@ -153,7 +153,7 @@ body {
 }
 
 .admin-header {
-  background: linear-gradient(135deg, var(--admin-purple), #8e44ad);
+  background: linear-gradient(135deg, var(--dark-blue), #2573a7);
   padding: 20px;
   display: flex;
   justify-content: space-between;
@@ -183,7 +183,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--admin-purple);
+  color: var(--dark-blue);
   font-weight: bold;
 }
 
@@ -224,7 +224,7 @@ body {
 }
 
 .admin-nav li.active {
-  background: var(--admin-purple);
+  background: var(--dark-blue);
   color: white;
 }
 
@@ -255,10 +255,10 @@ body {
 }
 
 .section-title {
-  color: var(--admin-purple);
+  color: var(--primary-blue);
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid var(--admin-purple);
+  border-bottom: 2px solid var(--primary-blue);
 }
 
 /* Video Management */
@@ -303,13 +303,13 @@ body {
 .video-form .form-select:focus,
 .video-form .form-textarea:focus {
   outline: none;
-  border-color: var(--admin-purple);
-  box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.1);
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
 /* Video Upload */
 .upload-area {
-  border: 2px dashed var(--admin-purple);
+  border: 2px dashed var(--primary-blue);
   border-radius: 10px;
   padding: 40px 20px;
   text-align: center;
@@ -319,13 +319,13 @@ body {
 }
 
 .upload-area:hover {
-  background: rgba(155, 89, 182, 0.05);
-  border-color: #8e44ad;
+  background: rgba(52, 152, 219, 0.05);
+  border-color: var(--dark-blue);
 }
 
 .upload-area i {
   font-size: 3rem;
-  color: var(--admin-purple);
+  color: var(--primary-blue);
   margin-bottom: 15px;
 }
 
@@ -361,7 +361,7 @@ body {
 }
 
 .video-category {
-  color: var(--admin-purple);
+  color: var(--primary-blue);
   font-size: 0.8rem;
   margin-bottom: 5px;
 }
@@ -409,14 +409,14 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(45deg, var(--admin-purple), #8e44ad);
+  background: linear-gradient(45deg, var(--primary-blue), var(--dark-blue));
   color: white;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(45deg, #8e44ad, var(--admin-purple));
+  background: linear-gradient(45deg, var(--dark-blue), var(--primary-blue));
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
 }
 
 .btn-success {
@@ -523,7 +523,7 @@ header {
 
 /* Admin Login Button */
 .admin-login-btn {
-  background: linear-gradient(45deg, var(--admin-purple), #8e44ad);
+  background: linear-gradient(45deg, var(--dark-blue), #2573a7);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -537,9 +537,9 @@ header {
 }
 
 .admin-login-btn:hover {
-  background: linear-gradient(45deg, #8e44ad, var(--admin-purple));
+  background: linear-gradient(45deg, #2573a7, var(--dark-blue));
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
 }
 
 /* Main Content */
@@ -883,7 +883,7 @@ footer {
 <div class="login-page" id="loginPage">
   <div class="login-container">
     <div class="login-logo">
-      <i class="fas fa-play-circle"></i> StreamFlow Admin
+      <i class="fas fa-play-circle"></i> WaterFlow Admin
     </div>
     <div class="login-box">
       <h2 class="login-title">Admin Login</h2>
@@ -901,7 +901,7 @@ footer {
       </form>
       
       <a href="#" class="back-to-site" onclick="showPublicSite()">
-        <i class="fas fa-arrow-left"></i> Back to Video Site
+        <i class="fas fa-arrow-left"></i> Back to Videos
       </a>
     </div>
   </div>
@@ -910,7 +910,7 @@ footer {
 <!-- Admin Dashboard -->
 <div class="admin-page" id="adminPage">
   <div class="admin-header">
-    <h1><i class="fas fa-tachometer-alt"></i> StreamFlow Admin</h1>
+    <h1><i class="fas fa-tachometer-alt"></i> WaterFlow Admin</h1>
     <div class="admin-user">
       <div class="admin-avatar">A</div>
       <span>Admin</span>
@@ -985,10 +985,12 @@ footer {
             <select class="form-select" id="videoCategory" required>
               <option value="">Select category</option>
               <option value="Entertainment">Entertainment</option>
-              <option value="Education">Education</option>
               <option value="Music">Music</option>
+              <option value="Education">Education</option>
               <option value="Gaming">Gaming</option>
               <option value="Technology">Technology</option>
+              <option value="Sports">Sports</option>
+              <option value="Documentary">Documentary</option>
             </select>
           </div>
         </div>
@@ -1083,9 +1085,9 @@ footer {
     <div class="container">
       <div class="header-container">
         <div class="logo">
-          <i class="fas fa-play-circle"></i>
-          StreamFlow
-          <span class="tagline">Premium Video Streaming</span>
+          <i class="fas fa-water"></i>
+          WaterFlow
+          <span class="tagline">Video Streaming Platform</span>
         </div>
         
         <!-- Admin Login Button -->
@@ -1130,7 +1132,7 @@ footer {
           <a href="#"><i class="fas fa-shield-alt"></i> Privacy</a>
         </div>
         <div class="copyright">
-          &copy; 2023 StreamFlow Video Platform. All rights reserved.
+          &copy; 2023 WaterFlow Video Platform. All rights reserved.
         </div>
       </div>
     </div>
@@ -1142,7 +1144,7 @@ footer {
 // ADMIN PANEL FUNCTIONS
 // =============================================
 
-// Admin login code
+// Admin login code - ONLY known by admin
 const ADMIN_CODE = "548755";
 
 // Video data storage
@@ -1150,50 +1152,75 @@ let videoData = {
   videos: [
     {
       id: 1,
-      title: "How to Build a Modern Website",
-      description: "Learn how to create a responsive website using HTML, CSS and JavaScript.",
-      category: "Technology",
-      url: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
-      thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+      title: "The Power of Water Flow",
+      description: "Discover the amazing properties and importance of water flow in our ecosystem.",
+      category: "Documentary",
+      url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
       duration: "15:30",
-      views: 450,
-      uploadDate: "2023-11-20"
+      views: 1245,
+      uploadDate: "2023-11-20",
+      featured: true
     },
     {
       id: 2,
-      title: "Understanding Machine Learning",
-      description: "An introduction to machine learning concepts for beginners.",
-      category: "Education",
-      url: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_2mb.mp4",
-      thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+      title: "Ocean Waves Meditation",
+      description: "Relaxing ocean waves for meditation and stress relief.",
+      category: "Entertainment",
+      url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
       duration: "22:45",
-      views: 320,
-      uploadDate: "2023-11-18"
+      views: 892,
+      uploadDate: "2023-11-18",
+      featured: true
     },
     {
       id: 3,
-      title: "Best Gaming Moments 2023",
-      description: "Compilation of the most epic gaming moments from 2023.",
-      category: "Gaming",
-      url: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_5mb.mp4",
-      thumbnail: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+      title: "Water Flow Physics Explained",
+      description: "Learn the science behind water flow and fluid dynamics.",
+      category: "Education",
+      url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
       duration: "18:20",
-      views: 890,
+      views: 756,
       uploadDate: "2023-11-15"
     },
     {
       id: 4,
-      title: "Chill Music Mix",
-      description: "Relaxing music for work and study.",
-      category: "Music",
-      url: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_10mb.mp4",
-      thumbnail: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+      title: "River Flow Sounds for Sleep",
+      description: "Peaceful river sounds to help you fall asleep faster.",
+      category: "Entertainment",
+      url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
       duration: "45:00",
-      views: 1250,
-      uploadDate: "2023-11-10"
+      views: 2103,
+      uploadDate: "2023-11-10",
+      featured: true
+    },
+    {
+      id: 5,
+      title: "Waterfall Wonders",
+      description: "Beautiful compilation of the world's most stunning waterfalls.",
+      category: "Documentary",
+      url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1512273222628-4daea6e55abb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+      duration: "32:15",
+      views: 1345,
+      uploadDate: "2023-11-05"
+    },
+    {
+      id: 6,
+      title: "Underwater Flow Visualization",
+      description: "Mesmerizing underwater currents and marine life in motion.",
+      category: "Entertainment",
+      url: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+      duration: "28:40",
+      views: 987,
+      uploadDate: "2023-11-01"
     }
   ],
-  categories: ["All", "Entertainment", "Education", "Music", "Gaming", "Technology"]
+  categories: ["All", "Entertainment", "Documentary", "Education", "Music", "Gaming", "Technology", "Sports"]
 };
 
 // Show login page
@@ -1232,7 +1259,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   if (adminCode === ADMIN_CODE) {
     showAdminDashboard();
   } else {
-    alert('Invalid admin code. Try: 548755');
+    alert('Invalid admin code. Access denied.');
   }
 });
 
@@ -1305,6 +1332,7 @@ function loadCategoriesList() {
       const categoryTag = document.createElement('span');
       categoryTag.className = 'video-category-tag';
       categoryTag.textContent = category;
+      categoryTag.style.margin = '5px';
       categoriesList.appendChild(categoryTag);
     }
   });
@@ -1383,14 +1411,16 @@ document.getElementById('videoUploadForm').addEventListener('submit', function(e
 // Get default thumbnail based on category
 function getDefaultThumbnail(category) {
   const thumbnails = {
-    "Technology": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-    "Education": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-    "Music": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-    "Gaming": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-    "Entertainment": "https://images.unsplash.com/photo-1514327609218-4c8c4c6b21c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+    "Entertainment": "https://images.unsplash.com/photo-1514327609218-4c8c4c6b21c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "Documentary": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "Education": "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "Music": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "Gaming": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "Technology": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    "Sports": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
   };
   
-  return thumbnails[category] || "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80";
+  return thumbnails[category] || "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80";
 }
 
 // Delete video
@@ -1494,9 +1524,13 @@ function loadVideoGrid(category = "All") {
     const videoCard = document.createElement('div');
     videoCard.className = 'video-card';
     
+    if (video.featured) {
+      videoCard.style.borderColor = 'var(--accent-blue)';
+    }
+    
     videoCard.innerHTML = `
       <div class="video-thumbnail">
-        <img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80'">
+        <img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
         <div class="play-overlay">
           <div class="play-icon">
             <i class="fas fa-play"></i>
@@ -1504,9 +1538,9 @@ function loadVideoGrid(category = "All") {
         </div>
       </div>
       <div class="video-info-card">
-        <h3 class="video-title-card">${video.title}</h3>
+        <h3 class="video-title-card">${video.title} ${video.featured ? '<i class="fas fa-star" style="color: var(--accent-blue); font-size: 0.8rem;"></i>' : ''}</h3>
         <div class="video-meta">
-          <span>${video.views} views</span>
+          <span>${video.views.toLocaleString()} views</span>
           <span>${video.duration}</span>
         </div>
         <p class="video-description">${video.description}</p>
@@ -1535,9 +1569,9 @@ function playVideo(video) {
   videoPlayer.src = video.url;
   
   videoPlayerDetails.innerHTML = `
-    <h2 class="video-player-title">${video.title}</h2>
+    <h2 class="video-player-title">${video.title} ${video.featured ? '<i class="fas fa-star" style="color: var(--accent-blue);"></i>' : ''}</h2>
     <div class="video-player-meta">
-      <span>${video.views} views • ${video.uploadDate} • ${video.duration}</span>
+      <span>${video.views.toLocaleString()} views • ${new Date(video.uploadDate).toLocaleDateString()} • ${video.duration}</span>
     </div>
     <p class="video-player-description">${video.description}</p>
   `;
@@ -1548,12 +1582,30 @@ function playVideo(video) {
   // Increment views
   video.views++;
   localStorage.setItem('videoData', JSON.stringify(videoData));
+  
+  // Update views count on the video card
+  updateVideoViewsOnCard(video.id, video.views);
+}
+
+// Update views count on video card
+function updateVideoViewsOnCard(videoId, newViews) {
+  const videoCards = document.querySelectorAll('.video-card');
+  videoCards.forEach(card => {
+    const title = card.querySelector('.video-title-card').textContent;
+    if (title.includes(videoData.videos.find(v => v.id === videoId)?.title || '')) {
+      const viewsSpan = card.querySelector('.video-meta span:first-child');
+      if (viewsSpan) {
+        viewsSpan.textContent = `${newViews.toLocaleString()} views`;
+      }
+    }
+  });
 }
 
 // Close video modal
 function closeVideoModal() {
   const videoPlayer = document.getElementById('videoPlayer');
   videoPlayer.pause();
+  videoPlayer.src = '';
   document.getElementById('videoModal').style.display = 'none';
 }
 
