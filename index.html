@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Water Flow - Premium Booty Call Platform</title>
+<title>StreamFlow - Video Streaming Platform</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * {
@@ -15,9 +15,9 @@
 }
 
 :root {
-  --primary-red: #ff3b30;
-  --dark-red: #d32f2f;
-  --accent-gold: #ffd700;
+  --primary-blue: #3498db;
+  --dark-blue: #2980b9;
+  --accent-purple: #9b59b6;
   --admin-purple: #9b59b6;
   --black: #121212;
   --dark-gray: #1e1e1e;
@@ -59,7 +59,7 @@ body {
 .login-logo {
   font-size: 2.5rem;
   font-weight: 800;
-  color: var(--primary-red);
+  color: var(--primary-blue);
   margin-bottom: 30px;
   text-align: center;
 }
@@ -74,7 +74,7 @@ body {
 }
 
 .login-title {
-  color: var(--primary-red);
+  color: var(--primary-blue);
   font-size: 1.8rem;
   margin-bottom: 10px;
   text-align: center;
@@ -110,13 +110,13 @@ body {
 
 .login-form .form-input:focus {
   outline: none;
-  border-color: var(--primary-red);
+  border-color: var(--primary-blue);
 }
 
 .login-btn {
   width: 100%;
   padding: 16px;
-  background: linear-gradient(45deg, var(--primary-red), var(--dark-red));
+  background: linear-gradient(45deg, var(--primary-blue), var(--dark-blue));
   color: white;
   border: none;
   border-radius: 8px;
@@ -128,9 +128,9 @@ body {
 }
 
 .login-btn:hover {
-  background: linear-gradient(45deg, var(--dark-red), var(--primary-red));
+  background: linear-gradient(45deg, var(--dark-blue), var(--primary-blue));
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 59, 48, 0.4);
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
 }
 
 .back-to-site {
@@ -142,7 +142,7 @@ body {
 }
 
 .back-to-site:hover {
-  color: var(--primary-red);
+  color: var(--primary-blue);
 }
 
 /* Admin Dashboard */
@@ -261,19 +261,19 @@ body {
   border-bottom: 2px solid var(--admin-purple);
 }
 
-/* Profile Management */
-.profile-form .form-row {
+/* Video Management */
+.video-form .form-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 15px;
   margin-bottom: 15px;
 }
 
-.profile-form .form-group {
+.video-form .form-group {
   margin-bottom: 15px;
 }
 
-.profile-form .form-label {
+.video-form .form-label {
   display: block;
   margin-bottom: 8px;
   color: var(--text-muted);
@@ -281,9 +281,9 @@ body {
   font-size: 0.9rem;
 }
 
-.profile-form .form-input, 
-.profile-form .form-select, 
-.profile-form .form-textarea {
+.video-form .form-input, 
+.video-form .form-select, 
+.video-form .form-textarea {
   width: 100%;
   padding: 12px;
   background: var(--light-gray);
@@ -294,106 +294,20 @@ body {
   transition: all 0.3s ease;
 }
 
-.profile-form .form-textarea {
+.video-form .form-textarea {
   min-height: 100px;
   resize: vertical;
 }
 
-.profile-form .form-input:focus,
-.profile-form .form-select:focus,
-.profile-form .form-textarea:focus {
+.video-form .form-input:focus,
+.video-form .form-select:focus,
+.video-form .form-textarea:focus {
   outline: none;
   border-color: var(--admin-purple);
   box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.1);
 }
 
-/* Availability Toggle */
-.availability-toggle {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin: 20px 0;
-  padding: 15px;
-  background: var(--light-gray);
-  border-radius: 10px;
-}
-
-.toggle-switch {
-  position: relative;
-  width: 60px;
-  height: 30px;
-}
-
-.toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.toggle-slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--warning);
-  transition: .4s;
-  border-radius: 34px;
-}
-
-.toggle-slider:before {
-  position: absolute;
-  content: "";
-  height: 22px;
-  width: 22px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%;
-}
-
-input:checked + .toggle-slider {
-  background-color: var(--success);
-}
-
-input:checked + .toggle-slider:before {
-  transform: translateX(30px);
-}
-
-/* Services Selection */
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-  margin: 15px 0;
-}
-
-.service-checkbox {
-  background: var(--light-gray);
-  padding: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-}
-
-.service-checkbox:hover {
-  border-color: var(--admin-purple);
-  transform: translateY(-2px);
-}
-
-.service-checkbox.selected {
-  border-color: var(--admin-purple);
-  background: rgba(155, 89, 182, 0.1);
-}
-
-.service-checkbox input {
-  margin-right: 8px;
-}
-
-/* Gallery Management */
+/* Video Upload */
 .upload-area {
   border: 2px dashed var(--admin-purple);
   border-radius: 10px;
@@ -415,35 +329,58 @@ input:checked + .toggle-slider:before {
   margin-bottom: 15px;
 }
 
-.gallery-preview {
+.video-preview {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
   margin: 20px 0;
 }
 
-.gallery-item {
+.video-item {
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-  aspect-ratio: 1;
+  background: var(--light-gray);
 }
 
-.gallery-item img {
+.video-item video {
   width: 100%;
-  height: 100%;
+  height: 150px;
   object-fit: cover;
 }
 
-.gallery-item .delete-btn {
+.video-info {
+  padding: 12px;
+}
+
+.video-title {
+  color: var(--text-light);
+  font-weight: 600;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+.video-category {
+  color: var(--admin-purple);
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+
+.video-desc {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
+.video-item .delete-btn {
   position: absolute;
   top: 5px;
   right: 5px;
   background: var(--warning);
   color: white;
   border: none;
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -452,129 +389,9 @@ input:checked + .toggle-slider:before {
   transition: all 0.3s ease;
 }
 
-.gallery-item .delete-btn:hover {
+.video-item .delete-btn:hover {
   background: #c0392b;
   transform: scale(1.1);
-}
-
-/* Reviews Management */
-.reviews-list {
-  max-height: 400px;
-  overflow-y: auto;
-  margin: 20px 0;
-}
-
-.review-item {
-  background: var(--light-gray);
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 10px;
-}
-
-.review-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.reviewer-name {
-  font-weight: 600;
-  color: var(--text-light);
-}
-
-.review-date {
-  color: var(--text-muted);
-  font-size: 0.8rem;
-}
-
-.review-text {
-  color: var(--text-muted);
-  margin-bottom: 10px;
-  line-height: 1.4;
-}
-
-.review-actions {
-  display: flex;
-  gap: 10px;
-}
-
-.reply-btn, .delete-btn {
-  padding: 6px 15px;
-  border-radius: 15px;
-  border: none;
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: all 0.3s ease;
-}
-
-.reply-btn {
-  background: var(--info);
-  color: white;
-}
-
-.reply-btn:hover {
-  background: #2980b9;
-  transform: translateY(-2px);
-}
-
-.delete-btn {
-  background: var(--warning);
-  color: white;
-}
-
-.delete-btn:hover {
-  background: #c0392b;
-  transform: translateY(-2px);
-}
-
-.reply-form {
-  margin-top: 10px;
-  display: none;
-}
-
-.reply-form textarea {
-  width: 100%;
-  padding: 10px;
-  background: var(--dark-gray);
-  border: 1px solid var(--medium-gray);
-  border-radius: 8px;
-  color: var(--text-light);
-  margin-bottom: 10px;
-  resize: vertical;
-}
-
-/* Stats Dashboard */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-  margin: 20px 0;
-}
-
-.stat-card {
-  background: var(--light-gray);
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--admin-purple);
-  margin-bottom: 5px;
-}
-
-.stat-label {
-  color: var(--text-muted);
-  font-size: 0.9rem;
 }
 
 /* Buttons */
@@ -657,16 +474,16 @@ input:checked + .toggle-slider:before {
 
 /* Public Site Styles */
 .container {
-  max-width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
 }
 
 /* Header */
 header {
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: rgba(18, 18, 18, 0.98);
   padding: 15px 0;
-  border-bottom: 2px solid var(--primary-red);
+  border-bottom: 2px solid var(--primary-blue);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -679,62 +496,33 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 0 10px;
-  position: relative;
-  min-height: 70px;
-}
-
-/* Center Logo Container */
-.center-logo-container {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  width: auto;
 }
 
 .logo {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--primary-red);
-  text-shadow: 0 0 10px rgba(255, 59, 48, 0.5);
+  color: var(--primary-blue);
+  text-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 10px;
 }
 
 .logo i {
   font-size: 2rem;
-  color: var(--primary-red);
+  color: var(--primary-blue);
 }
 
-.logo-text {
-  position: relative;
-}
-
-.logo-text::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to right, var(--primary-red), transparent);
-}
-
-.slogan {
-  color: var(--accent-gold);
+.tagline {
+  color: var(--text-muted);
   font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-align: center;
-  margin-top: 5px;
+  margin-left: 10px;
 }
 
-/* Login Button on Right */
-.login-btn-header {
+/* Admin Login Button */
+.admin-login-btn {
   background: linear-gradient(45deg, var(--admin-purple), #8e44ad);
   color: white;
   border: none;
@@ -745,11 +533,10 @@ header {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-left: auto;
   transition: all 0.3s ease;
 }
 
-.login-btn-header:hover {
+.admin-login-btn:hover {
   background: linear-gradient(45deg, #8e44ad, var(--admin-purple));
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
@@ -757,57 +544,19 @@ header {
 
 /* Main Content */
 .main-content {
-  padding: 20px 0;
+  padding: 30px 0;
   min-height: calc(100vh - 150px);
 }
 
-/* Step Containers */
-.step-container {
-  display: none;
-  background-color: var(--dark-gray);
-  border-radius: 12px;
-  padding: 25px 15px;
-  margin: 20px auto;
-  max-width: 100%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--medium-gray);
-}
-
-.active-step {
-  display: block;
-  animation: fadeIn 0.3s ease;
-}
-
-.step-title {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  color: var(--primary-red);
-  text-align: center;
-  position: relative;
-  padding-bottom: 10px;
-}
-
-.step-title::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 2px;
-  background-color: var(--primary-red);
-}
-
-/* City Search and Grid Styles */
+/* Search Bar */
 .search-container {
-  padding: 15px;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0 auto 30px;
+  padding: 0 15px;
 }
 
 .search-box {
   position: relative;
-  margin-bottom: 25px;
 }
 
 .search-input {
@@ -823,8 +572,8 @@ header {
 
 .search-input:focus {
   outline: none;
-  border-color: var(--primary-red);
-  box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1);
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
 .search-icon {
@@ -836,348 +585,205 @@ header {
   font-size: 18px;
 }
 
-.city-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 15px;
-  margin-top: 20px;
+/* Categories */
+.categories {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  padding: 0 15px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.city-card {
+.category-btn {
   background: var(--medium-gray);
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-  position: relative;
-  overflow: hidden;
-}
-
-.city-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--primary-red);
-  box-shadow: 0 10px 20px rgba(255, 59, 48, 0.2);
-}
-
-.city-card i {
-  font-size: 2rem;
-  color: var(--primary-red);
-  margin-bottom: 10px;
-}
-
-.city-name {
-  font-size: 1.2rem;
-  font-weight: 600;
   color: var(--text-light);
-  margin-bottom: 8px;
-}
-
-.booty-count {
-  font-size: 0.9rem;
-  color: var(--accent-gold);
-  background: rgba(255, 215, 0, 0.1);
-  padding: 4px 12px;
+  border: none;
+  padding: 8px 16px;
   border-radius: 20px;
-  display: inline-block;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
 }
 
-.city-card[style*="display: none"] {
-  display: none !important;
+.category-btn.active {
+  background: var(--primary-blue);
+  color: white;
 }
 
-/* Booty Call Cards */
-.booty-grid {
+.category-btn:hover:not(.active) {
+  background: var(--light-gray);
+}
+
+/* Video Grid */
+.video-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
-  margin-top: 20px;
+  padding: 0 15px;
 }
 
-.booty-card {
-  background: var(--medium-gray);
+.video-card {
+  background: var(--dark-gray);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.3s ease;
   border: 2px solid transparent;
 }
 
-.booty-card.featured {
-  border-color: var(--accent-gold);
-  position: relative;
-}
-
-.booty-card.featured::before {
-  content: "PREMIUM";
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  background: var(--accent-gold);
-  color: var(--black);
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 1px;
-  z-index: 1;
-}
-
-.booty-card:hover {
+.video-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary-blue);
 }
 
-.booty-img {
+.video-thumbnail {
+  position: relative;
   width: 100%;
-  height: 200px;
+  height: 180px;
+  overflow: hidden;
+}
+
+.video-thumbnail img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  display: block;
 }
 
-.booty-info {
-  padding: 20px;
+.play-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.booty-name {
-  font-size: 1.3rem;
+.video-card:hover .play-overlay {
+  opacity: 1;
+}
+
+.play-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--primary-blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.video-info-card {
+  padding: 15px;
+}
+
+.video-title-card {
+  font-size: 1.1rem;
   color: var(--text-light);
   margin-bottom: 8px;
+  font-weight: 600;
 }
 
-.booty-details {
+.video-meta {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 12px;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 10px;
 }
 
-.booty-location {
+.video-description {
   color: var(--text-muted);
   font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  line-height: 1.4;
+  margin-bottom: 10px;
 }
 
-.booty-location::before {
-  content: "📍";
-  font-size: 0.8rem;
-}
-
-.booty-features {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 15px 0;
-}
-
-.feature-tag {
-  background: rgba(255, 59, 48, 0.1);
-  color: var(--primary-red);
+.video-category-tag {
+  display: inline-block;
+  background: rgba(52, 152, 219, 0.1);
+  color: var(--primary-blue);
   padding: 4px 10px;
-  border-radius: 15px;
+  border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 600;
 }
 
-.feature-tag.accommodation {
-  background: rgba(155, 89, 182, 0.1);
-  color: var(--admin-purple);
-}
-
-.booty-pricing {
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid var(--light-gray);
-}
-
-.price-tag {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--accent-gold);
-  margin-bottom: 5px;
-}
-
-.price-note {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-/* Booking Form Styles - MODERN FIXED VERSION */
-.booking-form {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-@media (min-width: 768px) {
-  .form-row {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.booking-form .form-group {
-  margin-bottom: 20px;
-}
-
-.booking-form .form-label {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--text-light);
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.booking-form .form-input,
-.booking-form .form-select {
+/* Video Player Modal */
+.video-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 14px;
-  background: var(--light-gray);
-  border: 2px solid var(--medium-gray);
-  border-radius: 8px;
-  color: var(--text-light);
-  font-size: 14px;
-  transition: all 0.3s ease;
-}
-
-.booking-form textarea.form-input {
-  min-height: 100px;
-  resize: vertical;
-}
-
-.booking-form .form-input:focus,
-.booking-form .form-select:focus {
-  outline: none;
-  border-color: var(--primary-red);
-  box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1);
-}
-
-.booking-form .form-select {
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23aaaaaa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px;
-  padding-right: 40px;
-}
-
-.time-info {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-top: 5px;
-  padding-left: 5px;
-}
-
-.selfie-upload {
-  border: 2px dashed var(--primary-red);
-  border-radius: 10px;
-  padding: 30px;
-  text-align: center;
-  cursor: pointer;
-  margin-top: 10px;
-  position: relative;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 2000;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  padding: 20px;
+}
+
+.video-player-container {
+  width: 100%;
+  max-width: 1000px;
+  background: var(--dark-gray);
+  border-radius: 12px;
   overflow: hidden;
 }
 
-.selfie-upload:hover {
-  background: rgba(255, 59, 48, 0.05);
-  border-color: #ff6b6b;
+.video-player {
+  width: 100%;
+  height: 500px;
+  background: black;
 }
 
-.selfie-upload i {
-  font-size: 2.5rem;
-  color: var(--primary-red);
+.video-details {
+  padding: 20px;
+}
+
+.video-player-title {
+  font-size: 1.5rem;
+  color: var(--text-light);
   margin-bottom: 10px;
 }
 
-#selfiePreview {
-  max-width: 100%;
-  max-height: 300px;
-  border-radius: 8px;
-  margin-top: 15px;
-  display: none;
-  object-fit: cover;
-}
-
-.terms-agreement {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin: 25px 0;
-  padding: 20px;
-  background: rgba(255, 59, 48, 0.05);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 59, 48, 0.1);
-}
-
-.terms-agreement input {
-  margin-top: 3px;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
-.terms-agreement label {
-  color: var(--text-light);
-  font-size: 0.9rem;
-  line-height: 1.4;
-  cursor: pointer;
-  flex: 1;
-}
-
-.payment-box {
-  background: linear-gradient(135deg, var(--dark-gray), var(--medium-gray));
-  border: 2px solid var(--success);
-  border-radius: 12px;
-  padding: 25px;
-  text-align: center;
-  margin: 30px 0;
-  transition: all 0.3s ease;
-}
-
-.payment-box:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(39, 174, 96, 0.2);
-}
-
-.payment-box i {
-  font-size: 2.5rem;
-  color: var(--success);
+.video-player-meta {
+  color: var(--text-muted);
   margin-bottom: 15px;
+  font-size: 0.9rem;
 }
 
-.pay-button {
-  display: inline-block;
-  background: linear-gradient(45deg, var(--success), #27ae60);
+.video-player-description {
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
   color: white;
-  padding: 16px 32px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-top: 15px;
-  transition: all 0.3s ease;
   border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.pay-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+.close-modal:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
 }
 
 /* Footer */
@@ -1188,12 +794,18 @@ footer {
   border-top: 2px solid var(--medium-gray);
 }
 
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
 .footer-links {
   display: flex;
   justify-content: center;
   gap: 25px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
 }
 
 .footer-links a {
@@ -1208,8 +820,8 @@ footer {
 }
 
 .footer-links a:hover {
-  color: var(--primary-red);
-  background: rgba(255, 59, 48, 0.1);
+  color: var(--primary-blue);
+  background: rgba(52, 152, 219, 0.1);
   transform: translateY(-2px);
 }
 
@@ -1220,115 +832,48 @@ footer {
   margin-bottom: 10px;
 }
 
-.disclaimer {
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  font-style: italic;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.4;
-}
-
-/* Navigation Buttons */
-.btn-back {
-  background: var(--medium-gray);
-  color: var(--text-light);
-  border: 1px solid var(--light-gray);
-  padding: 12px 24px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.btn-back:hover {
-  background: var(--light-gray);
-  transform: translateY(-2px);
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  gap: 15px;
-}
-
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  .city-grid {
+  .video-grid {
     grid-template-columns: 1fr;
   }
   
-  .booty-grid {
-    grid-template-columns: 1fr;
+  .video-player {
+    height: 300px;
   }
   
   .footer-links {
     gap: 15px;
   }
   
-  .selfie-upload {
-    padding: 20px;
+  .categories {
+    padding: 0 10px;
   }
   
-  .header-container {
-    flex-direction: column;
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .admin-nav ul {
     gap: 10px;
-    padding: 10px;
-    min-height: auto;
-  }
-  
-  .center-logo-container {
-    position: relative;
-    left: 0;
-    transform: none;
-    order: 1;
-    margin: 10px 0;
-  }
-  
-  .login-btn-header {
-    order: 2;
-    margin-left: 0;
-    align-self: flex-end;
-  }
-  
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-  
-  .payment-box {
-    padding: 20px 15px;
   }
 }
 
 /* Tablet Styles */
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-    padding: 0 20px;
+@media (min-width: 768px) and (max-width: 1024px) {
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  .admin-nav ul {
-    flex-wrap: wrap;
-  }
-  
-  .services-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .video-player {
+    height: 400px;
   }
 }
 
 /* Desktop Styles */
 @media (min-width: 1024px) {
   .container {
-    max-width: 900px;
-  }
-  
-  .admin-content {
-    padding: 30px;
+    padding: 0 20px;
   }
 }
 </style>
@@ -1338,30 +883,25 @@ footer {
 <div class="login-page" id="loginPage">
   <div class="login-container">
     <div class="login-logo">
-      <i class="fas fa-fire"></i> Water Flow Admin
+      <i class="fas fa-play-circle"></i> StreamFlow Admin
     </div>
     <div class="login-box">
-      <h2 class="login-title">Login</h2>
-      <p class="login-subtitle">Access your dashboard to manage your profile</p>
+      <h2 class="login-title">Admin Login</h2>
+      <p class="login-subtitle">Enter admin code to access dashboard</p>
       
       <form class="login-form" id="loginForm">
         <div class="form-group">
-          <label class="form-label">Username</label>
-          <input type="text" class="form-input" id="username" placeholder="Enter your username" required>
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">Password</label>
-          <input type="password" class="form-input" id="password" placeholder="Enter your password" required>
+          <label class="form-label">Admin Code</label>
+          <input type="password" class="form-input" id="adminCode" placeholder="Enter admin code" required>
         </div>
         
         <button type="submit" class="login-btn">
-          <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+          <i class="fas fa-sign-in-alt"></i> Access Dashboard
         </button>
       </form>
       
       <a href="#" class="back-to-site" onclick="showPublicSite()">
-        <i class="fas fa-arrow-left"></i> Back to Public Site
+        <i class="fas fa-arrow-left"></i> Back to Video Site
       </a>
     </div>
   </div>
@@ -1370,10 +910,10 @@ footer {
 <!-- Admin Dashboard -->
 <div class="admin-page" id="adminPage">
   <div class="admin-header">
-    <h1><i class="fas fa-tachometer-alt"></i> Bunny's Dashboard</h1>
+    <h1><i class="fas fa-tachometer-alt"></i> StreamFlow Admin</h1>
     <div class="admin-user">
-      <div class="admin-avatar">B</div>
-      <span>Bunny</span>
+      <div class="admin-avatar">A</div>
+      <span>Admin</span>
       <button class="admin-logout" onclick="showPublicSite()">
         <i class="fas fa-sign-out-alt"></i> Logout
       </button>
@@ -1383,11 +923,9 @@ footer {
   <div class="admin-nav">
     <ul>
       <li class="active" data-section="dashboard">Dashboard</li>
-      <li data-section="profile">Profile Management</li>
-      <li data-section="gallery">Photo Gallery</li>
-      <li data-section="reviews">Reviews & Replies</li>
-      <li data-section="availability">Availability</li>
-      <li data-section="services">Services</li>
+      <li data-section="upload">Upload Video</li>
+      <li data-section="manage">Manage Videos</li>
+      <li data-section="categories">Categories</li>
     </ul>
   </div>
   
@@ -1398,199 +936,121 @@ footer {
       
       <div class="stats-grid">
         <div class="stat-card">
-          <div class="stat-number" id="totalBookings">0</div>
-          <div class="stat-label">Total Bookings</div>
+          <div class="stat-number" id="totalVideos">12</div>
+          <div class="stat-label">Total Videos</div>
         </div>
         
         <div class="stat-card">
-          <div class="stat-number" id="totalEarnings">R0</div>
-          <div class="stat-label">Total Earnings</div>
+          <div class="stat-number" id="totalViews">1.2K</div>
+          <div class="stat-label">Total Views</div>
         </div>
         
         <div class="stat-card">
-          <div class="stat-number" id="ratingScore">4.9</div>
-          <div class="stat-label">Average Rating</div>
+          <div class="stat-number">4</div>
+          <div class="stat-label">Categories</div>
         </div>
         
         <div class="stat-card">
-          <div class="stat-number" id="totalReviews">15</div>
-          <div class="stat-label">Total Reviews</div>
+          <div class="stat-number" id="latestUpload">Today</div>
+          <div class="stat-label">Latest Upload</div>
         </div>
       </div>
       
       <div style="margin-top: 30px;">
         <h3 style="color: var(--text-light); margin-bottom: 15px;">Quick Actions</h3>
         <div style="display: flex; gap: 15px; margin-top: 15px; flex-wrap: wrap;">
-          <button class="btn btn-primary" onclick="switchSection('profile')">
-            <i class="fas fa-user-edit"></i> Edit Profile
+          <button class="btn btn-primary" onclick="switchSection('upload')">
+            <i class="fas fa-upload"></i> Upload New Video
           </button>
-          <button class="btn btn-primary" onclick="switchSection('gallery')">
-            <i class="fas fa-images"></i> Upload Photos
-          </button>
-          <button class="btn btn-primary" onclick="switchSection('reviews')">
-            <i class="fas fa-comments"></i> Reply to Reviews
+          <button class="btn btn-primary" onclick="switchSection('manage')">
+            <i class="fas fa-film"></i> Manage Videos
           </button>
         </div>
       </div>
     </div>
     
-    <!-- Profile Management Section -->
-    <div class="admin-section" id="profileSection">
-      <h2 class="section-title"><i class="fas fa-user-edit"></i> Profile Management</h2>
+    <!-- Upload Video Section -->
+    <div class="admin-section" id="uploadSection">
+      <h2 class="section-title"><i class="fas fa-upload"></i> Upload New Video</h2>
       
-      <form class="profile-form" id="profileForm">
+      <form class="video-form" id="videoUploadForm">
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Display Name</label>
-            <input type="text" class="form-input" id="profileName" value="Bunny">
+            <label class="form-label">Video Title *</label>
+            <input type="text" class="form-input" id="videoTitle" placeholder="Enter video title" required>
           </div>
           
           <div class="form-group">
-            <label class="form-label">Age</label>
-            <input type="number" class="form-input" id="profileAge" value="25" min="18" max="50">
-          </div>
-        </div>
-        
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Location</label>
-            <input type="text" class="form-input" id="profileLocation" value="Quigney, East London">
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label">Body Type</label>
-            <select class="form-select" id="profileBodyType">
-              <option value="Slim" selected>Slim</option>
-              <option value="Curvy">Curvy</option>
-              <option value="Athletic">Athletic</option>
-              <option value="Voluptuous">Voluptuous</option>
+            <label class="form-label">Category *</label>
+            <select class="form-select" id="videoCategory" required>
+              <option value="">Select category</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Education">Education</option>
+              <option value="Music">Music</option>
+              <option value="Gaming">Gaming</option>
+              <option value="Technology">Technology</option>
             </select>
           </div>
         </div>
         
         <div class="form-group">
           <label class="form-label">Description</label>
-          <textarea class="form-textarea" id="profileDescription" rows="4">
-Sweet and fun-loving, professional booty call with great personality. Always on time and discreet. Speaks English and Xhosa. Available for both incall and outcall services. Premium experience guaranteed.
-          </textarea>
+          <textarea class="form-textarea" id="videoDescription" rows="4" placeholder="Enter video description..."></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Video URL *</label>
+          <input type="url" class="form-input" id="videoUrl" placeholder="https://example.com/video.mp4" required>
+          <small style="color: var(--text-muted); display: block; margin-top: 5px;">
+            Supported formats: MP4, WebM, OGG
+          </small>
         </div>
         
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Height</label>
-            <input type="text" class="form-input" id="profileHeight" value="5'5\"">
+            <label class="form-label">Thumbnail URL</label>
+            <input type="url" class="form-input" id="thumbnailUrl" placeholder="https://example.com/thumbnail.jpg">
           </div>
           
           <div class="form-group">
-            <label class="form-label">Measurements</label>
-            <input type="text" class="form-input" id="profileMeasurements" value="34-24-36">
+            <label class="form-label">Duration (minutes)</label>
+            <input type="number" class="form-input" id="videoDuration" placeholder="10" min="1" max="120">
           </div>
         </div>
         
-        <div class="form-group">
-          <label class="form-label">Languages</label>
-          <input type="text" class="form-input" id="profileLanguages" value="English, Xhosa" placeholder="Separate with commas">
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">Personality Traits</label>
-          <input type="text" class="form-input" id="profilePersonality" value="Friendly, Outgoing, Good Listener, Discreet, Professional" placeholder="Separate with commas">
-        </div>
-        
-        <div class="form-group">
-          <label class="form-label">Base Price (8 Hours)</label>
-          <input type="number" class="form-input" id="profilePrice" value="900" min="500" max="2000">
-          <small style="color: var(--text-muted); display: block; margin-top: 5px;">
-            4 Hours: R700 | 2 Hours: R500 (Automatically calculated)
-          </small>
-        </div>
-        
-        <button type="button" class="btn btn-primary" onclick="saveProfile()">
-          <i class="fas fa-save"></i> Save Profile Changes
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-upload"></i> Upload Video
         </button>
       </form>
     </div>
     
-    <!-- Gallery Management Section -->
-    <div class="admin-section" id="gallerySection">
-      <h2 class="section-title"><i class="fas fa-images"></i> Photo Gallery Management</h2>
+    <!-- Manage Videos Section -->
+    <div class="admin-section" id="manageSection">
+      <h2 class="section-title"><i class="fas fa-film"></i> Manage Videos</h2>
       
-      <div class="upload-area" onclick="document.getElementById('galleryUpload').click()">
-        <i class="fas fa-cloud-upload-alt"></i>
-        <h3>Click to Upload Photos</h3>
-        <p style="color: var(--text-muted);">Upload new pictures to keep your gallery fresh and engaging</p>
-        <input type="file" id="galleryUpload" accept="image/*" multiple style="display: none;">
-      </div>
-      
-      <div>
-        <h3 style="color: var(--text-light); margin: 20px 0 15px;">Current Gallery</h3>
-        <p style="color: var(--text-muted); margin-bottom: 15px;">
-          Click on any photo to set as main profile picture
-        </p>
-        
-        <div class="gallery-preview" id="galleryPreview">
-          <!-- Gallery items will be populated here -->
-        </div>
+      <div class="video-preview" id="videosList">
+        <!-- Videos will be populated here -->
       </div>
     </div>
     
-    <!-- Reviews Management Section -->
-    <div class="admin-section" id="reviewsSection">
-      <h2 class="section-title"><i class="fas fa-comments"></i> Reviews & Customer Feedback</h2>
+    <!-- Categories Section -->
+    <div class="admin-section" id="categoriesSection">
+      <h2 class="section-title"><i class="fas fa-tags"></i> Video Categories</h2>
       
-      <div class="reviews-list" id="reviewsList">
-        <!-- Reviews will be populated here -->
-      </div>
-    </div>
-    
-    <!-- Availability Management Section -->
-    <div class="admin-section" id="availabilitySection">
-      <h2 class="section-title"><i class="fas fa-calendar-check"></i> Availability Settings</h2>
-      
-      <div class="availability-toggle">
-        <div class="toggle-switch">
-          <input type="checkbox" id="availableToggle" checked>
-          <span class="toggle-slider"></span>
-        </div>
-        <div>
-          <h3 style="color: var(--success);">Currently Available</h3>
-          <p style="color: var(--text-muted);">Clients can book you when you're available</p>
+      <div style="margin: 20px 0;">
+        <h3 style="color: var(--text-light); margin-bottom: 15px;">Current Categories</h3>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;" id="categoriesList">
+          <!-- Categories will be populated here -->
         </div>
       </div>
       
-      <div class="form-group" style="margin-top: 30px;">
-        <label class="form-label">Availability Schedule</label>
-        <textarea class="form-textarea" id="availabilitySchedule" rows="3">
-Monday-Saturday: 8PM - 4AM
-Sunday: Available on request
-Advance booking recommended
-        </textarea>
+      <div class="form-group">
+        <label class="form-label">Add New Category</label>
+        <input type="text" class="form-input" id="newCategory" placeholder="Enter new category name">
       </div>
       
-      <button class="btn btn-primary" onclick="saveAvailability()">
-        <i class="fas fa-save"></i> Update Availability
-      </button>
-    </div>
-    
-    <!-- Services Management Section -->
-    <div class="admin-section" id="servicesSection">
-      <h2 class="section-title"><i class="fas fa-heart"></i> Services Offered</h2>
-      
-      <p style="color: var(--text-muted); margin-bottom: 20px;">
-        Select the services you offer. Clients will see these when viewing your profile.
-      </p>
-      
-      <div class="services-grid" id="servicesGrid">
-        <!-- Services will be populated here -->
-      </div>
-      
-      <div class="form-group" style="margin-top: 30px;">
-        <label class="form-label">Custom Service (Add new)</label>
-        <input type="text" class="form-input" id="customService" placeholder="Enter a new service you offer">
-      </div>
-      
-      <button class="btn btn-primary" onclick="saveServices()">
-        <i class="fas fa-save"></i> Save Services
+      <button class="btn btn-primary" onclick="addCategory()">
+        <i class="fas fa-plus"></i> Add Category
       </button>
     </div>
   </div>
@@ -1602,23 +1062,35 @@ Advance booking recommended
   <span>Changes saved successfully!</span>
 </div>
 
-<!-- Public Site (Original Site) -->
+<!-- Video Player Modal -->
+<div class="video-modal" id="videoModal">
+  <button class="close-modal" onclick="closeVideoModal()">
+    <i class="fas fa-times"></i>
+  </button>
+  <div class="video-player-container">
+    <video class="video-player" id="videoPlayer" controls>
+      Your browser does not support the video tag.
+    </video>
+    <div class="video-details" id="videoPlayerDetails">
+      <!-- Video details will be populated here -->
+    </div>
+  </div>
+</div>
+
+<!-- Public Video Site -->
 <div id="publicSite">
   <header>
     <div class="container">
       <div class="header-container">
-        <!-- Logo Container (Centered) -->
-        <div class="center-logo-container">
-          <div class="logo">
-            <i class="fas fa-fire"></i>
-            <div class="logo-text">Water Flow</div>
-          </div>
-          <div class="slogan">Eastern Cape Premium Booty Call Service</div>
+        <div class="logo">
+          <i class="fas fa-play-circle"></i>
+          StreamFlow
+          <span class="tagline">Premium Video Streaming</span>
         </div>
         
-        <!-- Login Button (Right Side) -->
-        <button class="login-btn-header" onclick="showLoginPage()">
-          <i class="fas fa-user-lock"></i> Login
+        <!-- Admin Login Button -->
+        <button class="admin-login-btn" onclick="showLoginPage()">
+          <i class="fas fa-user-lock"></i> Admin Login
         </button>
       </div>
     </div>
@@ -1626,186 +1098,40 @@ Advance booking recommended
 
   <div class="main-content">
     <div class="container">
-      <!-- Step 1: Location Search -->
-      <div class="step-container active-step" id="step1">
-        <h2 class="step-title">Make That Booty Call</h2>
-        
-        <div class="search-container">
-          <p style="text-align: center; color: var(--accent-gold); margin-bottom: 20px; font-size: 1rem;">
-            <i class="fas fa-map-marker-alt"></i> Find available booty calls in your city
-          </p>
-          
-          <div class="search-box">
-            <input type="text" id="citySearch" class="search-input" placeholder="Search for your city...">
-            <div class="search-icon">
-              <i class="fas fa-search"></i>
-            </div>
+      <!-- Search Bar -->
+      <div class="search-container">
+        <div class="search-box">
+          <input type="text" id="videoSearch" class="search-input" placeholder="Search videos...">
+          <div class="search-icon">
+            <i class="fas fa-search"></i>
           </div>
-          
-          <div class="city-grid" id="cityGrid">
-            <!-- Cities populated by JavaScript -->
-          </div>
-        </div>
-        
-        <div style="text-align: center; margin-top: 30px; color: var(--text-muted); font-size: 0.9rem;">
-          <p><i class="fas fa-info-circle"></i> Tap on your city to see available booty calls</p>
         </div>
       </div>
-
-      <!-- Step 2: Booty Call Details -->
-      <div class="step-container" id="step2">
-        <h2 class="step-title">Available in <span id="selectedCityDisplay">Your Area</span></h2>
-        
-        <div class="booty-grid" id="bootyGrid">
-          <!-- Booty calls populated by JavaScript -->
-        </div>
-        
-        <div class="button-container">
-          <button class="btn btn-back" id="back-to-search">Change Location</button>
-        </div>
+      
+      <!-- Categories -->
+      <div class="categories" id="videoCategories">
+        <!-- Categories will be populated here -->
       </div>
-
-      <!-- Step 3: Booty Call Profile -->
-      <div class="step-container" id="step3">
-        <div style="margin-bottom: 20px;">
-          <button class="btn-back" onclick="goToStep(2)" style="padding: 10px 15px; font-size: 0.9rem;">
-            <i class="fas fa-arrow-left"></i> Back
-          </button>
-        </div>
-        
-        <div id="bootyProfile">
-          <!-- Profile populated by JavaScript -->
-        </div>
-      </div>
-
-      <!-- Step 4: Booking Form -->
-      <div class="step-container" id="step4">
-        <h2 class="step-title">Book <span id="bootyNameDisplay"></span></h2>
-        
-        <form class="booking-form" id="bookingForm" onsubmit="return validateBookingForm(event)">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="full-name">Full Name *</label>
-              <input type="text" id="full-name" class="form-input" placeholder="First and Last Name" required>
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label" for="phone">WhatsApp Number *</label>
-              <input type="tel" id="phone" class="form-input" placeholder="+27 63 123 4567" required>
-            </div>
-          </div>
-          
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="location">Meeting Location *</label>
-              <input type="text" id="location" class="form-input" placeholder="Your address or meeting point" required>
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label" for="date">Preferred Date *</label>
-              <input type="date" id="date" class="form-input" required>
-            </div>
-          </div>
-          
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="start-time">Start Time *</label>
-              <select id="start-time" class="form-select" required>
-                <option value="">Select start time</option>
-                <option value="18:00">6:00 PM</option>
-                <option value="19:00">7:00 PM</option>
-                <option value="20:00">8:00 PM</option>
-                <option value="21:00">9:00 PM</option>
-                <option value="22:00">10:00 PM</option>
-                <option value="23:00">11:00 PM</option>
-                <option value="00:00">12:00 AM</option>
-                <option value="01:00">1:00 AM</option>
-                <option value="02:00">2:00 AM</option>
-                <option value="03:00">3:00 AM</option>
-                <option value="04:00">4:00 AM</option>
-              </select>
-              <div id="endTimeDisplay" class="time-info"></div>
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label" for="duration">Duration *</label>
-              <select id="duration" class="form-select" required>
-                <option value="">Select duration</option>
-                <option value="2">2 Hours - R500</option>
-                <option value="4">4 Hours - R700</option>
-                <option value="8">8 Hours - R900</option>
-              </select>
-            </div>
-          </div>
-          
-          <!-- Selfie Upload -->
-          <div class="form-group">
-            <label class="form-label">Verify Identity - Upload Selfie *</label>
-            <div class="selfie-upload" id="selfieUpload">
-              <i class="fas fa-camera"></i>
-              <h4>Tap to Upload Selfie</h4>
-              <p style="color: var(--text-muted); font-size: 0.85rem;">
-                Take a selfie now to verify you're a real person
-              </p>
-              <input type="file" id="selfieInput" accept="image/*" style="display: none;">
-              <img id="selfiePreview" alt="Selfie Preview">
-            </div>
-            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 10px;">
-              <i class="fas fa-shield-alt"></i> Your selfie is only used for verification
-            </p>
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label" for="special-requests">Special Requests</label>
-            <textarea id="special-requests" class="form-input" rows="3" placeholder="Any specific requests..."></textarea>
-          </div>
-          
-          <div class="terms-agreement">
-            <input type="checkbox" id="terms" required>
-            <label for="terms">
-              I confirm I am 18+ years old and agree to all terms. I understand this is a paid service for consenting adults.
-            </label>
-          </div>
-          
-          <div class="payment-box">
-            <i class="fas fa-lock"></i>
-            <h3>Secure Online Payment Required</h3>
-            <p>Complete your booking with secure online payment</p>
-            <p style="font-size: 1.2rem; color: var(--accent-gold); margin: 10px 0;">
-              Amount: R<span id="bookingAmount">900</span>
-            </p>
-            <a href="https://securepay.ikhokha.com/fgx22b1yj70w2bn" target="_blank" class="pay-button" id="payNowBtn">
-              <i class="fas fa-credit-card"></i> Pay Now
-            </a>
-            <p style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
-              You will be redirected to our secure payment gateway
-            </p>
-          </div>
-          
-          <div class="button-container">
-            <button type="button" class="btn btn-back" id="back-to-profile">Back to Profile</button>
-            <button type="submit" class="btn btn-primary">
-              <i class="fas fa-check-circle"></i> Submit Booking
-            </button>
-          </div>
-        </form>
+      
+      <!-- Video Grid -->
+      <div class="video-grid" id="videoGrid">
+        <!-- Videos will be populated here -->
       </div>
     </div>
   </div>
 
   <footer>
     <div class="container">
-      <div class="footer-links">
-        <a href="#"><i class="fas fa-shield-alt"></i> Safety</a>
-        <a href="#"><i class="fas fa-question-circle"></i> FAQ</a>
-        <a href="#"><i class="fas fa-phone-alt"></i> Support</a>
-        <a href="#"><i class="fas fa-ban"></i> Cancel</a>
-      </div>
-      <div class="copyright">
-        &copy; 2023 Water Flow Eastern Cape. Adults 18+ only.
-      </div>
-      <div class="disclaimer">
-        <i class="fas fa-exclamation-circle"></i> All services are between consenting adults. 
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#"><i class="fas fa-info-circle"></i> About</a>
+          <a href="#"><i class="fas fa-question-circle"></i> FAQ</a>
+          <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+          <a href="#"><i class="fas fa-shield-alt"></i> Privacy</a>
+        </div>
+        <div class="copyright">
+          &copy; 2023 StreamFlow Video Platform. All rights reserved.
+        </div>
       </div>
     </div>
   </footer>
@@ -1816,89 +1142,58 @@ Advance booking recommended
 // ADMIN PANEL FUNCTIONS
 // =============================================
 
-// Bunny's admin credentials
-const ADMIN_CREDENTIALS = {
-  username: "bunny",
-  password: "waterflow2023"
-};
+// Admin login code
+const ADMIN_CODE = "548755";
 
-// Bunny's profile data (stored in localStorage)
-let bunnyProfile = {
-  name: "Bunny",
-  age: 25,
-  location: "Quigney, East London",
-  bodyType: "Slim",
-  description: "Sweet and fun-loving, professional booty call with great personality. Always on time and discreet. Speaks English and Xhosa. Available for both incall and outcall services. Premium experience guaranteed.",
-  height: "5'5\"",
-  measurements: "34-24-36",
-  languages: ["English", "Xhosa"],
-  personality: ["Friendly", "Outgoing", "Good Listener", "Discreet", "Professional"],
-  price: 900,
-  available: true,
-  availabilitySchedule: "Monday-Saturday: 8PM - 4AM\nSunday: Available on request\nAdvance booking recommended",
-  services: [
-    "GFE (Girlfriend Experience)",
-    "Dinner Dates",
-    "Overnight",
-    "Roleplay",
-    "GFE Plus",
-    "Massage",
-    "Companionship",
-    "Travel Companion"
-  ],
-  gallery: [
-    { type: "image", url: "https://i.ibb.co/fY6ddf9x/bunny-new1.jpg", title: "Bunny - New Main Photo" },
-    { type: "image", url: "https://i.ibb.co/9mrggMPk/bunny-new2.jpg", title: "Bunny - New Photo 2" },
-    { type: "image", url: "https://i.ibb.co/ZpBNL8nm/bunny.jpg", title: "Bunny - Previous Photo" }
-  ],
-  reviews: [
+// Video data storage
+let videoData = {
+  videos: [
     {
       id: 1,
-      name: "Mike",
-      date: "2023-11-15",
-      rating: 5,
-      comment: "Bunny is absolutely amazing! Premium service worth every rand. Will definitely book again.",
-      reply: "Thank you Mike! Looking forward to seeing you again 😊"
+      title: "How to Build a Modern Website",
+      description: "Learn how to create a responsive website using HTML, CSS and JavaScript.",
+      category: "Technology",
+      url: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+      duration: "15:30",
+      views: 450,
+      uploadDate: "2023-11-20"
     },
     {
       id: 2,
-      name: "David",
-      date: "2023-11-10",
-      rating: 5,
-      comment: "Top quality service. Bunny is professional, sweet, and knows how to make you feel special. Worth R900!",
-      reply: "Thanks David! It was a pleasure meeting you ❤️"
+      title: "Understanding Machine Learning",
+      description: "An introduction to machine learning concepts for beginners.",
+      category: "Education",
+      url: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_2mb.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+      duration: "22:45",
+      views: 320,
+      uploadDate: "2023-11-18"
     },
     {
       id: 3,
-      name: "John",
-      date: "2023-11-05",
-      rating: 5,
-      comment: "Premium experience! Clean accommodation, professional service. Best booty call in East London.",
-      reply: "Appreciate the kind words John! Can't wait for our next meeting 💋"
+      title: "Best Gaming Moments 2023",
+      description: "Compilation of the most epic gaming moments from 2023.",
+      category: "Gaming",
+      url: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_5mb.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+      duration: "18:20",
+      views: 890,
+      uploadDate: "2023-11-15"
     },
     {
       id: 4,
-      name: "Thabo",
-      date: "2023-10-28",
-      rating: 5,
-      comment: "Worth every cent! Bunny provides premium service that matches the price. Highly recommended.",
-      reply: ""
-    },
-    {
-      id: 5,
-      name: "Sipho",
-      date: "2023-10-20",
-      rating: 4,
-      comment: "Good service, professional attitude. Price is fair for the quality provided.",
-      reply: ""
+      title: "Chill Music Mix",
+      description: "Relaxing music for work and study.",
+      category: "Music",
+      url: "https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_10mb.mp4",
+      thumbnail: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+      duration: "45:00",
+      views: 1250,
+      uploadDate: "2023-11-10"
     }
   ],
-  stats: {
-    totalBookings: 42,
-    totalEarnings: 37800,
-    rating: 4.9,
-    totalReviews: 15
-  }
+  categories: ["All", "Entertainment", "Education", "Music", "Gaming", "Technology"]
 };
 
 // Show login page
@@ -1924,21 +1219,20 @@ function showPublicSite() {
   document.getElementById('loginPage').style.display = 'none';
   document.getElementById('adminPage').style.display = 'none';
   
-  // Refresh public site with updated data
-  refreshPublicSite();
+  // Load videos
+  loadPublicVideos();
 }
 
 // Handle login
 document.getElementById('loginForm').addEventListener('submit', function(e) {
   e.preventDefault();
   
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
+  const adminCode = document.getElementById('adminCode').value;
   
-  if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+  if (adminCode === ADMIN_CODE) {
     showAdminDashboard();
   } else {
-    alert('Invalid username or password. Try: bunny / waterflow2023');
+    alert('Invalid admin code. Try: 548755');
   }
 });
 
@@ -1963,315 +1257,173 @@ function switchSection(sectionId) {
 
 // Load admin data
 function loadAdminData() {
-  // Load profile data
-  document.getElementById('profileName').value = bunnyProfile.name;
-  document.getElementById('profileAge').value = bunnyProfile.age;
-  document.getElementById('profileLocation').value = bunnyProfile.location;
-  document.getElementById('profileBodyType').value = bunnyProfile.bodyType;
-  document.getElementById('profileDescription').value = bunnyProfile.description;
-  document.getElementById('profileHeight').value = bunnyProfile.height;
-  document.getElementById('profileMeasurements').value = bunnyProfile.measurements;
-  document.getElementById('profileLanguages').value = bunnyProfile.languages.join(', ');
-  document.getElementById('profilePersonality').value = bunnyProfile.personality.join(', ');
-  document.getElementById('profilePrice').value = bunnyProfile.price;
+  // Load videos list
+  loadVideosList();
   
-  // Load availability
-  document.getElementById('availableToggle').checked = bunnyProfile.available;
-  document.getElementById('availabilitySchedule').value = bunnyProfile.availabilitySchedule;
-  
-  // Load gallery
-  loadGallery();
-  
-  // Load reviews
-  loadReviews();
-  
-  // Load services
-  loadServices();
+  // Load categories
+  loadCategoriesList();
   
   // Load stats
   loadStats();
 }
 
-// Load gallery - FIXED UPLOAD FUNCTION
-function loadGallery() {
-  const galleryPreview = document.getElementById('galleryPreview');
-  galleryPreview.innerHTML = '';
+// Load videos list
+function loadVideosList() {
+  const videosList = document.getElementById('videosList');
+  videosList.innerHTML = '';
   
-  bunnyProfile.gallery.forEach((item, index) => {
-    const galleryItem = document.createElement('div');
-    galleryItem.className = 'gallery-item';
+  videoData.videos.forEach(video => {
+    const videoItem = document.createElement('div');
+    videoItem.className = 'video-item';
     
-    galleryItem.innerHTML = `
-      <img src="${item.url}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/150/333/ffffff?text=Photo+${index+1}'">
-      <button class="delete-btn" onclick="deleteGalleryItem(${index})">
-        <i class="fas fa-times"></i>
-      </button>
-    `;
-    
-    galleryItem.addEventListener('click', (e) => {
-      if (e.target.classList.contains('delete-btn') || e.target.closest('.delete-btn')) return;
-      // Set as main image
-      const mainImage = bunnyProfile.gallery[index];
-      bunnyProfile.gallery.splice(index, 1);
-      bunnyProfile.gallery.unshift(mainImage);
-      loadGallery();
-      showSaveStatus('Main image updated!');
-    });
-    
-    galleryPreview.appendChild(galleryItem);
-  });
-}
-
-// Load reviews
-function loadReviews() {
-  const reviewsList = document.getElementById('reviewsList');
-  reviewsList.innerHTML = '';
-  
-  bunnyProfile.reviews.forEach(review => {
-    const reviewItem = document.createElement('div');
-    reviewItem.className = 'review-item';
-    
-    reviewItem.innerHTML = `
-      <div class="review-header">
-        <div class="reviewer-name">${review.name}</div>
-        <div class="review-date">${new Date(review.date).toLocaleDateString()}</div>
-      </div>
-      <div style="color: var(--accent-gold); margin: 5px 0;">
-        ${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}
-      </div>
-      <div class="review-text">${review.comment}</div>
-      ${review.reply ? `
-        <div style="background: rgba(52, 152, 219, 0.1); padding: 10px; border-radius: 8px; margin-top: 10px;">
-          <strong style="color: var(--info);">Your Reply:</strong>
-          <p style="color: var(--text-muted); margin-top: 5px;">${review.reply}</p>
-        </div>
-      ` : ''}
-      <div class="review-actions">
-        ${!review.reply ? `
-          <button class="reply-btn" onclick="showReplyForm(${review.id})">
-            <i class="fas fa-reply"></i> Reply
+    videoItem.innerHTML = `
+      <video src="${video.url}" style="width: 100%; height: 150px;"></video>
+      <div class="video-info">
+        <div class="video-title">${video.title}</div>
+        <div class="video-category">${video.category}</div>
+        <div class="video-desc">${video.description.substring(0, 60)}...</div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="color: var(--text-muted); font-size: 0.8rem;">${video.duration} • ${video.views} views</span>
+          <button class="delete-btn" onclick="deleteVideo(${video.id})">
+            <i class="fas fa-trash"></i>
           </button>
-        ` : ''}
-        <button class="delete-btn" onclick="deleteReview(${review.id})">
-          <i class="fas fa-trash"></i> Delete
-        </button>
-      </div>
-      <div class="reply-form" id="replyForm-${review.id}">
-        <textarea id="replyText-${review.id}" placeholder="Type your reply here..." rows="3"></textarea>
-        <div style="display: flex; gap: 10px;">
-          <button class="btn btn-primary" onclick="submitReply(${review.id})">Send Reply</button>
-          <button class="btn btn-secondary" onclick="hideReplyForm(${review.id})">Cancel</button>
         </div>
       </div>
     `;
     
-    reviewsList.appendChild(reviewItem);
+    videosList.appendChild(videoItem);
   });
 }
 
-// Load services
-function loadServices() {
-  const servicesGrid = document.getElementById('servicesGrid');
-  servicesGrid.innerHTML = '';
+// Load categories list
+function loadCategoriesList() {
+  const categoriesList = document.getElementById('categoriesList');
+  categoriesList.innerHTML = '';
   
-  const allServices = [
-    "GFE (Girlfriend Experience)",
-    "Dinner Dates",
-    "Overnight",
-    "Roleplay",
-    "GFE Plus",
-    "Massage",
-    "Companionship",
-    "Travel Companion",
-    "Weekend Getaway",
-    "BDSM",
-    "Couples",
-    "Fetish Friendly",
-    "Dominant",
-    "Submissive",
-    "Switch"
-  ];
-  
-  allServices.forEach(service => {
-    const isSelected = bunnyProfile.services.includes(service);
-    const serviceItem = document.createElement('div');
-    serviceItem.className = `service-checkbox ${isSelected ? 'selected' : ''}`;
-    serviceItem.innerHTML = `
-      <label style="display: flex; align-items: center; cursor: pointer;">
-        <input type="checkbox" ${isSelected ? 'checked' : ''} value="${service}" style="margin-right: 10px;">
-        ${service}
-      </label>
-    `;
-    
-    serviceItem.addEventListener('click', (e) => {
-      if (e.target.tagName === 'INPUT') return;
-      const checkbox = serviceItem.querySelector('input');
-      checkbox.checked = !checkbox.checked;
-      serviceItem.classList.toggle('selected');
-    });
-    
-    servicesGrid.appendChild(serviceItem);
+  videoData.categories.forEach(category => {
+    if (category !== "All") {
+      const categoryTag = document.createElement('span');
+      categoryTag.className = 'video-category-tag';
+      categoryTag.textContent = category;
+      categoriesList.appendChild(categoryTag);
+    }
   });
 }
 
 // Load stats
 function loadStats() {
-  document.getElementById('totalBookings').textContent = bunnyProfile.stats.totalBookings;
-  document.getElementById('totalEarnings').textContent = `R${bunnyProfile.stats.totalEarnings.toLocaleString()}`;
-  document.getElementById('ratingScore').textContent = bunnyProfile.stats.rating;
-  document.getElementById('totalReviews').textContent = bunnyProfile.stats.totalReviews;
+  document.getElementById('totalVideos').textContent = videoData.videos.length;
+  
+  const totalViews = videoData.videos.reduce((sum, video) => sum + video.views, 0);
+  document.getElementById('totalViews').textContent = totalViews > 1000 ? 
+    `${(totalViews/1000).toFixed(1)}K` : totalViews;
+  
+  const latestVideo = videoData.videos[0];
+  if (latestVideo) {
+    const uploadDate = new Date(latestVideo.uploadDate);
+    const today = new Date();
+    const diffTime = Math.abs(today - uploadDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 0) {
+      document.getElementById('latestUpload').textContent = "Today";
+    } else if (diffDays === 1) {
+      document.getElementById('latestUpload').textContent = "Yesterday";
+    } else {
+      document.getElementById('latestUpload').textContent = `${diffDays} days ago`;
+    }
+  }
 }
 
-// Save profile
-function saveProfile() {
-  bunnyProfile.name = document.getElementById('profileName').value;
-  bunnyProfile.age = parseInt(document.getElementById('profileAge').value);
-  bunnyProfile.location = document.getElementById('profileLocation').value;
-  bunnyProfile.bodyType = document.getElementById('profileBodyType').value;
-  bunnyProfile.description = document.getElementById('profileDescription').value;
-  bunnyProfile.height = document.getElementById('profileHeight').value;
-  bunnyProfile.measurements = document.getElementById('profileMeasurements').value;
-  bunnyProfile.languages = document.getElementById('profileLanguages').value.split(',').map(lang => lang.trim());
-  bunnyProfile.personality = document.getElementById('profilePersonality').value.split(',').map(trait => trait.trim());
-  bunnyProfile.price = parseInt(document.getElementById('profilePrice').value);
+// Handle video upload
+document.getElementById('videoUploadForm').addEventListener('submit', function(e) {
+  e.preventDefault();
   
-  // Save to localStorage
-  localStorage.setItem('bunnyProfile', JSON.stringify(bunnyProfile));
+  const title = document.getElementById('videoTitle').value;
+  const category = document.getElementById('videoCategory').value;
+  const description = document.getElementById('videoDescription').value;
+  const url = document.getElementById('videoUrl').value;
+  const thumbnail = document.getElementById('thumbnailUrl').value;
+  const duration = document.getElementById('videoDuration').value;
   
-  showSaveStatus('Profile saved successfully!');
-}
-
-// Save availability
-function saveAvailability() {
-  bunnyProfile.available = document.getElementById('availableToggle').checked;
-  bunnyProfile.availabilitySchedule = document.getElementById('availabilitySchedule').value;
+  // Create new video object
+  const newVideo = {
+    id: Date.now(),
+    title: title,
+    description: description,
+    category: category,
+    url: url,
+    thumbnail: thumbnail || getDefaultThumbnail(category),
+    duration: duration ? `${duration}:00` : "10:00",
+    views: 0,
+    uploadDate: new Date().toISOString().split('T')[0]
+  };
   
-  localStorage.setItem('bunnyProfile', JSON.stringify(bunnyProfile));
-  showSaveStatus('Availability updated!');
-}
-
-// Save services
-function saveServices() {
-  const selectedServices = [];
-  document.querySelectorAll('#servicesGrid input:checked').forEach(checkbox => {
-    selectedServices.push(checkbox.value);
-  });
+  // Add to videos array
+  videoData.videos.unshift(newVideo);
   
-  // Add custom service if provided
-  const customService = document.getElementById('customService').value.trim();
-  if (customService && !selectedServices.includes(customService)) {
-    selectedServices.push(customService);
+  // Add category if new
+  if (!videoData.categories.includes(category)) {
+    videoData.categories.push(category);
   }
   
-  bunnyProfile.services = selectedServices;
-  localStorage.setItem('bunnyProfile', JSON.stringify(bunnyProfile));
-  showSaveStatus('Services updated!');
+  // Save to localStorage
+  localStorage.setItem('videoData', JSON.stringify(videoData));
   
-  // Clear custom service field
-  document.getElementById('customService').value = '';
+  // Clear form
+  this.reset();
   
-  // Reload services
-  loadServices();
+  // Show success message
+  showSaveStatus('Video uploaded successfully!');
+  
+  // Reload data
+  loadAdminData();
+});
+
+// Get default thumbnail based on category
+function getDefaultThumbnail(category) {
+  const thumbnails = {
+    "Technology": "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+    "Education": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+    "Music": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+    "Gaming": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+    "Entertainment": "https://images.unsplash.com/photo-1514327609218-4c8c4c6b21c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+  };
+  
+  return thumbnails[category] || "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80";
 }
 
-// Show reply form
-function showReplyForm(reviewId) {
-  document.querySelectorAll('.reply-form').forEach(form => {
-    form.style.display = 'none';
-  });
-  document.getElementById(`replyForm-${reviewId}`).style.display = 'block';
+// Delete video
+function deleteVideo(videoId) {
+  if (confirm('Are you sure you want to delete this video?')) {
+    videoData.videos = videoData.videos.filter(video => video.id !== videoId);
+    localStorage.setItem('videoData', JSON.stringify(videoData));
+    showSaveStatus('Video deleted!');
+    loadAdminData();
+  }
 }
 
-// Hide reply form
-function hideReplyForm(reviewId) {
-  document.getElementById(`replyForm-${reviewId}`).style.display = 'none';
-}
-
-// Submit reply
-function submitReply(reviewId) {
-  const replyText = document.getElementById(`replyText-${reviewId}`).value.trim();
-  if (!replyText) {
-    alert('Please enter a reply message');
+// Add category
+function addCategory() {
+  const newCategoryInput = document.getElementById('newCategory');
+  const newCategory = newCategoryInput.value.trim();
+  
+  if (!newCategory) {
+    alert('Please enter a category name');
     return;
   }
   
-  const review = bunnyProfile.reviews.find(r => r.id === reviewId);
-  if (review) {
-    review.reply = replyText;
-    localStorage.setItem('bunnyProfile', JSON.stringify(bunnyProfile));
-    showSaveStatus('Reply sent!');
-    loadReviews();
+  if (videoData.categories.includes(newCategory)) {
+    alert('Category already exists');
+    return;
   }
+  
+  videoData.categories.push(newCategory);
+  localStorage.setItem('videoData', JSON.stringify(videoData));
+  showSaveStatus('Category added!');
+  loadCategoriesList();
+  newCategoryInput.value = '';
 }
-
-// Delete review
-function deleteReview(reviewId) {
-  if (confirm('Are you sure you want to delete this review?')) {
-    bunnyProfile.reviews = bunnyProfile.reviews.filter(r => r.id !== reviewId);
-    bunnyProfile.stats.totalReviews = bunnyProfile.reviews.length;
-    localStorage.setItem('bunnyProfile', JSON.stringify(bunnyProfile));
-    showSaveStatus('Review deleted!');
-    loadReviews();
-    loadStats();
-  }
-}
-
-// Delete gallery item
-function deleteGalleryItem(index) {
-  if (confirm('Are you sure you want to delete this image?')) {
-    bunnyProfile.gallery.splice(index, 1);
-    localStorage.setItem('bunnyProfile', JSON.stringify(bunnyProfile));
-    loadGallery();
-    showSaveStatus('Image deleted!');
-  }
-}
-
-// Handle gallery upload - FIXED UPLOAD FUNCTION
-document.getElementById('galleryUpload').addEventListener('change', function(e) {
-  const files = e.target.files;
-  if (files.length > 0) {
-    // Show upload status
-    showSaveStatus('Uploading images...');
-    
-    // Process each file
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      
-      // Check if it's an image
-      if (!file.type.startsWith('image/')) {
-        alert(`File "${file.name}" is not an image. Please upload only images.`);
-        continue;
-      }
-      
-      const reader = new FileReader();
-      
-      reader.onload = function(e) {
-        // Create a unique ID for the image
-        const imageId = Date.now() + Math.random().toString(36).substr(2, 9);
-        const newImage = {
-          type: 'image',
-          url: e.target.result,
-          title: `New Photo ${bunnyProfile.gallery.length + 1}`,
-          id: imageId
-        };
-        
-        bunnyProfile.gallery.push(newImage);
-        localStorage.setItem('bunnyProfile', JSON.stringify(bunnyProfile));
-        loadGallery();
-        showSaveStatus(`Uploaded ${files.length} image${files.length > 1 ? 's' : ''}!`);
-      };
-      
-      reader.onerror = function() {
-        alert(`Error reading file: ${file.name}`);
-      };
-      
-      reader.readAsDataURL(file);
-    }
-    
-    // Reset file input
-    e.target.value = '';
-  }
-});
 
 // Show save status
 function showSaveStatus(message) {
@@ -2284,23 +1436,158 @@ function showSaveStatus(message) {
   }, 3000);
 }
 
-// Refresh public site with updated data
-function refreshPublicSite() {
-  if (typeof displayBootyCalls === 'function') {
-    displayBootyCalls(bookingData.selectedCity || 'East London');
+// =============================================
+// PUBLIC SITE FUNCTIONS
+// =============================================
+
+// Load public videos
+function loadPublicVideos() {
+  // Load categories
+  loadVideoCategories();
+  
+  // Load videos grid
+  loadVideoGrid();
+}
+
+// Load video categories
+function loadVideoCategories() {
+  const videoCategories = document.getElementById('videoCategories');
+  videoCategories.innerHTML = '';
+  
+  videoData.categories.forEach(category => {
+    const categoryBtn = document.createElement('button');
+    categoryBtn.className = 'category-btn';
+    categoryBtn.textContent = category;
+    categoryBtn.dataset.category = category;
+    
+    if (category === "All") {
+      categoryBtn.classList.add('active');
+    }
+    
+    categoryBtn.addEventListener('click', () => {
+      // Set active category
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      categoryBtn.classList.add('active');
+      
+      // Filter videos
+      filterVideosByCategory(category);
+    });
+    
+    videoCategories.appendChild(categoryBtn);
+  });
+}
+
+// Load video grid
+function loadVideoGrid(category = "All") {
+  const videoGrid = document.getElementById('videoGrid');
+  videoGrid.innerHTML = '';
+  
+  let videosToShow = videoData.videos;
+  
+  if (category !== "All") {
+    videosToShow = videoData.videos.filter(video => video.category === category);
+  }
+  
+  videosToShow.forEach(video => {
+    const videoCard = document.createElement('div');
+    videoCard.className = 'video-card';
+    
+    videoCard.innerHTML = `
+      <div class="video-thumbnail">
+        <img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80'">
+        <div class="play-overlay">
+          <div class="play-icon">
+            <i class="fas fa-play"></i>
+          </div>
+        </div>
+      </div>
+      <div class="video-info-card">
+        <h3 class="video-title-card">${video.title}</h3>
+        <div class="video-meta">
+          <span>${video.views} views</span>
+          <span>${video.duration}</span>
+        </div>
+        <p class="video-description">${video.description}</p>
+        <span class="video-category-tag">${video.category}</span>
+      </div>
+    `;
+    
+    videoCard.addEventListener('click', () => {
+      playVideo(video);
+    });
+    
+    videoGrid.appendChild(videoCard);
+  });
+}
+
+// Filter videos by category
+function filterVideosByCategory(category) {
+  loadVideoGrid(category);
+}
+
+// Play video
+function playVideo(video) {
+  const videoPlayer = document.getElementById('videoPlayer');
+  const videoPlayerDetails = document.getElementById('videoPlayerDetails');
+  
+  videoPlayer.src = video.url;
+  
+  videoPlayerDetails.innerHTML = `
+    <h2 class="video-player-title">${video.title}</h2>
+    <div class="video-player-meta">
+      <span>${video.views} views • ${video.uploadDate} • ${video.duration}</span>
+    </div>
+    <p class="video-player-description">${video.description}</p>
+  `;
+  
+  // Show modal
+  document.getElementById('videoModal').style.display = 'flex';
+  
+  // Increment views
+  video.views++;
+  localStorage.setItem('videoData', JSON.stringify(videoData));
+}
+
+// Close video modal
+function closeVideoModal() {
+  const videoPlayer = document.getElementById('videoPlayer');
+  videoPlayer.pause();
+  document.getElementById('videoModal').style.display = 'none';
+}
+
+// Initialize search
+function initializeSearch() {
+  const videoSearch = document.getElementById('videoSearch');
+  if (videoSearch) {
+    videoSearch.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const videoCards = document.querySelectorAll('.video-card');
+      
+      videoCards.forEach(card => {
+        const title = card.querySelector('.video-title-card').textContent.toLowerCase();
+        const description = card.querySelector('.video-description').textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || description.includes(searchTerm)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
   }
 }
 
-// Initialize admin panel
+// Initialize on load
 document.addEventListener('DOMContentLoaded', function() {
-  // Load saved profile from localStorage
-  const savedProfile = localStorage.getItem('bunnyProfile');
-  if (savedProfile) {
+  // Load saved data from localStorage
+  const savedVideoData = localStorage.getItem('videoData');
+  if (savedVideoData) {
     try {
-      bunnyProfile = JSON.parse(savedProfile);
+      videoData = JSON.parse(savedVideoData);
     } catch (e) {
-      console.error('Error parsing saved profile:', e);
-      // Keep default profile if error
+      console.error('Error parsing saved video data:', e);
     }
   }
   
@@ -2312,339 +1599,24 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // Initialize public site
-  initializePublicSite();
-});
-
-// =============================================
-// PUBLIC SITE FUNCTIONS
-// =============================================
-
-// Data storage for public site
-const bookingData = {
-  selectedCity: '',
-  selectedBooty: null,
-  price: 900,
-  duration: '8',
-  startTime: '',
-  endTime: '',
-  selfieUploaded: false
-};
-
-// Eastern Cape Cities
-const easternCapeCities = [
-  { name: "East London", bootyCalls: 1 },
-  { name: "Gqeberha (Port Elizabeth)", bootyCalls: 0 },
-  { name: "Mthatha", bootyCalls: 0 },
-  { name: "Qonce (King William's Town)", bootyCalls: 0 }
-];
-
-// Initialize cities grid
-function initializeCities() {
-  const cityGrid = document.getElementById('cityGrid');
-  if (!cityGrid) return;
+  showPublicSite();
   
-  cityGrid.innerHTML = '';
+  // Initialize search
+  initializeSearch();
   
-  easternCapeCities.forEach(city => {
-    const cityCard = document.createElement('div');
-    cityCard.className = 'city-card';
-    cityCard.innerHTML = `
-      <i class="fas fa-map-marker-alt"></i>
-      <div class="city-name">${city.name}</div>
-      <div class="booty-count">${city.bootyCalls} booty call${city.bootyCalls !== 1 ? 's' : ''}</div>
-    `;
-    
-    cityCard.addEventListener('click', () => {
-      bookingData.selectedCity = city.name;
-      document.getElementById('selectedCityDisplay').textContent = city.name;
-      displayBootyCalls(city.name);
-      goToStep(2);
-    });
-    
-    cityGrid.appendChild(cityCard);
-  });
-}
-
-// Initialize public site
-function initializePublicSite() {
-  initializeCities();
-  
-  // Set up city search
-  const citySearch = document.getElementById('citySearch');
-  if (citySearch) {
-    citySearch.addEventListener('input', function() {
-      const searchTerm = this.value.toLowerCase();
-      const cityCards = document.querySelectorAll('.city-card');
-      
-      cityCards.forEach(card => {
-        const cityName = card.querySelector('.city-name').textContent.toLowerCase();
-        if (cityName.includes(searchTerm)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  }
-  
-  // Set up navigation buttons
-  const backToSearchBtn = document.getElementById('back-to-search');
-  if (backToSearchBtn) {
-    backToSearchBtn.addEventListener('click', () => goToStep(1));
-  }
-  
-  const backToProfileBtn = document.getElementById('back-to-profile');
-  if (backToProfileBtn) {
-    backToProfileBtn.addEventListener('click', () => goToStep(3));
-  }
-  
-  // Set up booking form
-  setupBookingForm();
-  
-  // Set up selfie upload
-  const selfieUpload = document.getElementById('selfieUpload');
-  const selfieInput = document.getElementById('selfieInput');
-  const selfiePreview = document.getElementById('selfiePreview');
-  
-  if (selfieUpload && selfieInput && selfiePreview) {
-    selfieUpload.addEventListener('click', () => selfieInput.click());
-    
-    selfieInput.addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        // Check if it's an image
-        if (!file.type.startsWith('image/')) {
-          alert('Please select an image file');
-          return;
-        }
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          selfiePreview.src = e.target.result;
-          selfiePreview.style.display = 'block';
-          bookingData.selfieUploaded = true;
-          
-          // Update upload area text
-          selfieUpload.querySelector('h4').textContent = 'Selfie Uploaded';
-          selfieUpload.querySelector('p').textContent = 'Tap to change photo';
-          selfieUpload.querySelector('i').className = 'fas fa-check-circle';
-          selfieUpload.querySelector('i').style.color = 'var(--success)';
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  }
-  
-  // Set default date to tomorrow
-  const dateInput = document.getElementById('date');
-  if (dateInput) {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const formattedDate = tomorrow.toISOString().split('T')[0];
-    dateInput.min = formattedDate;
-    dateInput.value = formattedDate;
-  }
-}
-
-// Display booty calls
-function displayBootyCalls(cityName) {
-  const bootyGrid = document.getElementById('bootyGrid');
-  if (!bootyGrid) return;
-  
-  // Only show Bunny for East London
-  if (cityName !== 'East London') {
-    bootyGrid.innerHTML = `
-      <div style="text-align: center; padding: 40px;">
-        <i class="fas fa-frown" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 20px;"></i>
-        <h3 style="color: var(--text-muted); margin-bottom: 10px;">No Booty Calls Available</h3>
-        <p style="color: var(--text-muted);">No premium booty calls are currently available in ${cityName}.</p>
-        <p style="color: var(--accent-gold); margin-top: 15px;">
-          <i class="fas fa-map-marker-alt"></i> Try searching in East London
-        </p>
-      </div>
-    `;
-    return;
-  }
-  
-  bootyGrid.innerHTML = `
-    <div class="booty-card featured">
-      <img src="${bunnyProfile.gallery[0]?.url || 'https://via.placeholder.com/300x200/333/ffffff?text=Bunny+Profile'}" alt="Bunny" class="booty-img" onerror="this.src='https://via.placeholder.com/300x200/333/ffffff?text=Bunny+Profile'">
-      <div class="booty-info">
-        <h3 class="booty-name">${bunnyProfile.name}, ${bunnyProfile.age}</h3>
-        <div class="booty-details">
-          <span class="booty-location">${bunnyProfile.location}</span>
-          <span style="color: var(--accent-gold); font-weight: 600;">${bunnyProfile.bodyType} • PREMIUM</span>
-        </div>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin: 8px 0;">
-          <i class="far fa-clock"></i> ${bunnyProfile.available ? 'Available Now' : 'Currently Unavailable'}
-        </p>
-        <div class="booty-features">
-          <span class="feature-tag accommodation">Premium</span>
-          <span class="feature-tag">Verified</span>
-          <span class="feature-tag">Professional</span>
-        </div>
-        <div class="booty-pricing">
-          <div class="price-tag">R${bunnyProfile.price}</div>
-          <p class="price-note">8 Hours Premium Service</p>
-        </div>
-        <button class="btn btn-primary" style="width: 100%; margin-top: 12px;" onclick="viewBootyProfile()">
-          <i class="fas fa-user-circle"></i> View Profile & Book
-        </button>
-      </div>
-    </div>
-  `;
-}
-
-// View booty profile
-function viewBootyProfile() {
-  bookingData.selectedBooty = bunnyProfile;
-  goToStep(3);
-  
-  const profileHTML = `
-    <div class="booty-card featured">
-      <img src="${bunnyProfile.gallery[0]?.url || 'https://via.placeholder.com/300x200/333/ffffff?text=Bunny+Profile'}" alt="${bunnyProfile.name}" class="booty-img" onerror="this.src='https://via.placeholder.com/300x200/333/ffffff?text=Bunny+Profile'">
-      <div class="booty-info">
-        <h3 class="booty-name">${bunnyProfile.name}, ${bunnyProfile.age}</h3>
-        <div class="booty-details">
-          <span class="booty-location">${bunnyProfile.location}</span>
-          <span style="color: var(--accent-gold); font-weight: 600;">${bunnyProfile.bodyType} • PREMIUM</span>
-        </div>
-        
-        <div style="margin: 15px 0; padding: 12px; background: rgba(255, 59, 48, 0.05); border-radius: 8px;">
-          <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 5px;">
-            <i class="far fa-clock"></i> <strong>Availability:</strong> ${bunnyProfile.availabilitySchedule.split('\n')[0]}
-          </p>
-          <p style="color: var(--text-muted); font-size: 0.85rem;">
-            <i class="fas fa-home"></i> <strong>Status:</strong> ${bunnyProfile.available ? 'Available for bookings' : 'Currently unavailable'}
-          </p>
-        </div>
-        
-        <p style="font-size: 0.9rem; color: var(--text-light); margin: 15px 0; line-height: 1.5;">
-          ${bunnyProfile.description}
-        </p>
-        
-        <div style="margin: 15px 0;">
-          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px;">
-            <i class="fas fa-heart"></i> <strong>Services Offered:</strong>
-          </p>
-          <div style="display: flex; flex-wrap: wrap; gap: 5px;">
-            ${bunnyProfile.services.slice(0, 5).map(service => `
-              <span style="display: inline-block; background: rgba(255, 59, 48, 0.1); color: var(--primary-red); padding: 4px 8px; border-radius: 12px; font-size: 0.8rem;">
-                ${service}
-              </span>
-            `).join('')}
-          </div>
-        </div>
-        
-        <div class="booty-pricing">
-          <div class="price-tag">R${bunnyProfile.price}</div>
-          <p class="price-note">8 Hours Premium Service with accommodation</p>
-          <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="startBooking()">
-            <i class="fas fa-calendar-check"></i> Book Premium Service - R${bunnyProfile.price}
-          </button>
-        </div>
-      </div>
-    </div>
-  `;
-  
-  document.getElementById('bootyProfile').innerHTML = profileHTML;
-}
-
-// Start booking
-function startBooking() {
-  document.getElementById('bootyNameDisplay').textContent = bunnyProfile.name;
-  document.getElementById('bookingAmount').textContent = bunnyProfile.price;
-  goToStep(4);
-}
-
-// Setup booking form
-function setupBookingForm() {
-  const durationSelect = document.getElementById('duration');
-  const startTimeSelect = document.getElementById('start-time');
-  const endTimeDisplay = document.getElementById('endTimeDisplay');
-  const bookingAmount = document.getElementById('bookingAmount');
-  
-  if (durationSelect) {
-    durationSelect.addEventListener('change', function() {
-      const duration = parseInt(this.value);
-      let price = 900;
-      
-      if (duration === 2) price = 500;
-      else if (duration === 4) price = 700;
-      
-      bookingData.price = price;
-      bookingData.duration = duration;
-      bookingAmount.textContent = price;
-      
-      updateEndTime();
-    });
-  }
-  
-  if (startTimeSelect) {
-    startTimeSelect.addEventListener('change', function() {
-      bookingData.startTime = this.value;
-      updateEndTime();
-    });
-  }
-  
-  // Calculate end time
-  function updateEndTime() {
-    if (bookingData.startTime && bookingData.duration) {
-      const [hours, minutes] = bookingData.startTime.split(':').map(Number);
-      const endTime = new Date();
-      endTime.setHours(hours + parseInt(bookingData.duration));
-      endTime.setMinutes(minutes);
-      
-      const endHours = endTime.getHours().toString().padStart(2, '0');
-      const endMinutes = endTime.getMinutes().toString().padStart(2, '0');
-      
-      endTimeDisplay.textContent = `Ends at: ${endHours}:${endMinutes}`;
+  // Close modal on escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeVideoModal();
     }
-  }
-}
-
-// Validate booking form
-function validateBookingForm(event) {
-  event.preventDefault();
-  
-  // Check if selfie is uploaded
-  if (!bookingData.selfieUploaded) {
-    alert('Please upload a selfie for verification');
-    return false;
-  }
-  
-  // Check if terms are accepted
-  const termsCheckbox = document.getElementById('terms');
-  if (!termsCheckbox.checked) {
-    alert('You must agree to the terms and conditions');
-    return false;
-  }
-  
-  // All validations passed - show payment success message
-  alert('Form submitted successfully! You will now be redirected to the payment page.');
-  
-  // In a real app, you would submit the form to a server
-  // For demo purposes, we'll just proceed to payment
-  
-  return true;
-}
-
-// Navigation functions for public site
-function goToStep(step) {
-  document.querySelectorAll('.step-container').forEach(container => {
-    container.classList.remove('active-step');
   });
-  document.getElementById(`step${step}`).classList.add('active-step');
-}
-
-// Initialize on load
-document.addEventListener('DOMContentLoaded', function() {
-  // Check if we should show admin or public site
-  if (window.location.hash === '#admin') {
-    showLoginPage();
-  } else {
-    showPublicSite();
-  }
+  
+  // Close modal on click outside
+  document.getElementById('videoModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeVideoModal();
+    }
+  });
 });
 </script>
 </body>
