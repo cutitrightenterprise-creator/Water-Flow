@@ -1664,7 +1664,7 @@ function handleThumbnailFileSelect(e) {
 }
 
 // Handle video upload form submission
-document.getElementById('videoUploadForm').addEventListener('submit', function(e) {
+document.getElementById('videoUploadForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   
   if (!selectedVideoFile) {
@@ -1692,152 +1692,102 @@ document.getElementById('videoUploadForm').addEventListener('submit', function(e
   uploadSubmitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
   
   // Start upload process
-  uploadVideo(title, category, description);
+  await uploadVideo(title, category, description);
 });
 
-function uploadVideo(title, category, description) {
+async function uploadVideo(title, category, description) {
+  try {
+    // Step 1: Read video file
+    updateProgress(10, 'Reading video file...');
+    const videoDataUrl = await readFileAsDataURL(selectedVideoFile);
+    
+    // Step 2: Get video duration
+    updateProgress(30, 'Getting video duration...');
+    let duration = "0:00";
+    try {
+      const videoDuration = await getVideoDuration(selectedVideoFile);
+      duration = formatDuration(videoDuration);
+    } catch (error) {
+      console.log('Could not get duration, using default');
+    }
+    
+    // Step 3: Prepare thumbnail
+    updateProgress(50, 'Preparing thumbnail...');
+    const thumbnail = thumbnailPreviewUrl || getDefaultThumbnail(category);
+    
+    // Step 4: Create video object
+    updateProgress(70, 'Creating video entry...');
+    const newVideo = {
+      id: Date.now().toString(),
+      title: title,
+      description: description || "No description provided",
+      category: category,
+      videoData: videoDataUrl,
+      thumbnail: thumbnail,
+      duration: duration,
+      views: 0,
+      uploadDate: new Date().toISOString().split('T')[0],
+      fileSize: (selectedVideoFile.size / (1024 * 1024)).toFixed(2) + "MB",
+      fileName: selectedVideoFile.name
+    };
+    
+    // Step 5: Save to storage
+    updateProgress(90, 'Saving video...');
+    videoData.videos.unshift(newVideo);
+    
+    // Add category if new
+    if (!videoData.categories.includes(category)) {
+      videoData.categories.push(category);
+    }
+    
+    // Save to localStorage
+    localStorage.setItem('waterflow_videoData', JSON.stringify(videoData));
+    
+    // Step 6: Complete
+    updateProgress(100, 'Upload complete!');
+    
+    // Short delay to show completion
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    // Hide progress
+    document.getElementById('uploadProgress').style.display = 'none';
+    
+    // Reset form
+    resetUploadForm();
+    
+    // Show success message
+    showSaveStatus('Video uploaded successfully!');
+    
+    // Reload data
+    loadAdminData();
+    loadPublicVideos();
+    
+  } catch (error) {
+    console.error('Upload error:', error);
+    alert('Error uploading video: ' + error.message);
+    resetUploadState();
+  }
+}
+
+function updateProgress(percent, message) {
   const progressFill = document.getElementById('progressFill');
   const progressText = document.getElementById('progressText');
   
-  // Reset progress
-  progressFill.style.width = '0%';
-  progressText.textContent = 'Starting upload...';
-  
-  // Create FileReader to read video file
-  const reader = new FileReader();
-  
-  reader.onloadstart = function() {
-    progressFill.style.width = '10%';
-    progressText.textContent = 'Reading video file...';
-  };
-  
-  reader.onprogress = function(e) {
-    if (e.lengthComputable) {
-      const percentLoaded = Math.round((e.loaded / e.total) * 100);
-      progressFill.style.width = percentLoaded + '%';
-      progressText.textContent = `Uploading: ${percentLoaded}%`;
-    }
-  };
-  
-  reader.onload = function(e) {
-    progressFill.style.width = '70%';
-    progressText.textContent = 'Processing video...';
-    
-    const videoDataUrl = e.target.result;
-    
-    // Get video duration
-    getVideoDuration(selectedVideoFile).then(duration => {
-      progressFill.style.width = '85%';
-      progressText.textContent = 'Creating video entry...';
-      
-      const durationFormatted = formatDuration(duration);
-      
-      // Create new video object
-      const newVideo = {
-        id: Date.now().toString(),
-        title: title,
-        description: description || "No description provided",
-        category: category,
-        videoData: videoDataUrl,
-        thumbnail: thumbnailPreviewUrl || getDefaultThumbnail(category),
-        duration: durationFormatted,
-        views: 0,
-        uploadDate: new Date().toISOString().split('T')[0],
-        fileSize: (selectedVideoFile.size / (1024 * 1024)).toFixed(2) + "MB",
-        fileName: selectedVideoFile.name
-      };
-      
-      // Add to videos array
-      videoData.videos.unshift(newVideo);
-      
-      // Add category if new
-      if (!videoData.categories.includes(category)) {
-        videoData.categories.push(category);
-      }
-      
-      // Save to localStorage
-      localStorage.setItem('waterflow_videoData', JSON.stringify(videoData));
-      
-      // Complete progress
-      progressFill.style.width = '100%';
-      progressText.textContent = 'Upload complete!';
-      
-      // Short delay to show completion
-      setTimeout(() => {
-        // Hide progress
-        document.getElementById('uploadProgress').style.display = 'none';
-        
-        // Reset form
-        resetUploadForm();
-        
-        // Show success message
-        showSaveStatus('Video uploaded successfully!');
-        
-        // Reload data
-        loadAdminData();
-        loadPublicVideos();
-      }, 500);
-      
-    }).catch(error => {
-      console.error('Error getting duration:', error);
-      // Continue without duration
-      completeUpload(title, category, description, videoDataUrl, "0:00");
-    });
-  };
-  
-  reader.onerror = function() {
-    alert('Error reading video file. Please try again.');
-    resetUploadState();
-  };
-  
-  reader.onabort = function() {
-    alert('Upload cancelled.');
-    resetUploadState();
-  };
-  
-  // Start reading the file
-  reader.readAsDataURL(selectedVideoFile);
+  progressFill.style.width = percent + '%';
+  progressText.textContent = message;
 }
 
-function completeUpload(title, category, description, videoDataUrl, duration) {
-  // Create new video object
-  const newVideo = {
-    id: Date.now().toString(),
-    title: title,
-    description: description || "No description provided",
-    category: category,
-    videoData: videoDataUrl,
-    thumbnail: thumbnailPreviewUrl || getDefaultThumbnail(category),
-    duration: duration,
-    views: 0,
-    uploadDate: new Date().toISOString().split('T')[0],
-    fileSize: (selectedVideoFile.size / (1024 * 1024)).toFixed(2) + "MB",
-    fileName: selectedVideoFile.name
-  };
-  
-  // Add to videos array
-  videoData.videos.unshift(newVideo);
-  
-  // Add category if new
-  if (!videoData.categories.includes(category)) {
-    videoData.categories.push(category);
-  }
-  
-  // Save to localStorage
-  localStorage.setItem('waterflow_videoData', JSON.stringify(videoData));
-  
-  // Hide progress
-  document.getElementById('uploadProgress').style.display = 'none';
-  
-  // Reset form
-  resetUploadForm();
-  
-  // Show success message
-  showSaveStatus('Video uploaded successfully!');
-  
-  // Reload data
-  loadAdminData();
-  loadPublicVideos();
+function readFileAsDataURL(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      resolve(e.target.result);
+    };
+    reader.onerror = function(e) {
+      reject(new Error('Failed to read file'));
+    };
+    reader.readAsDataURL(file);
+  });
 }
 
 function getVideoDuration(file) {
